@@ -30,11 +30,15 @@ namespace SriapButForms
 		const int CARD_HEIGHT = 202;
 		const int CARD_DISTANCE = 10;
 
+		// ---- Images ---- //
+
+		readonly Image[] CardImages = new Image[IMAGE_COUNT];
+		readonly Image[] IncludedImages = new Image[CARD_COUNT / PAIRS];
+		int[] SelectedImages = new int[CARD_COUNT];
+
 		// ---- Cards ---- //
 
 		readonly Color CARD_COLOUR = Color.FromArgb(0x00, 0xED, 0xF2);
-		readonly Image[] CardImages = new Image[IMAGE_COUNT];
-		int[] SelectedImages = new int[CARD_COUNT];
 		readonly Card[] CardComponents = new Card[CARD_COUNT];
 		Point CARD_0_LOCATION;
 
@@ -70,7 +74,10 @@ namespace SriapButForms
 
 		private void FormForGameplay_Load(object sender, EventArgs e)
 		{
+			Random randomGenerator = new();
+
 			appLog.output = listBoxLog;
+
 			CARD_0_LOCATION = new((Size.Width / 2) - ((CARD_WIDTH + CARD_DISTANCE) * 2), 5);
 
 			appLog.LogFill($"Card scale: {CARD_WIDTH} x {CARD_HEIGHT}");
@@ -82,7 +89,6 @@ namespace SriapButForms
 
 			for (int i = 0; i < CARD_COUNT; i++)
 			{
-				Random randomGenerator = new();
 				int[] unselectedImages = Enumerable.Range(0, IMAGE_COUNT)
 					// Find each from SelectedImages occurring twice and check if `i` is one
 					.Where(i => !(SelectedImages
