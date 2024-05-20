@@ -12,6 +12,7 @@ namespace SriapButForms
 		public static readonly Image ERROR = Properties.Resources.CardError;
 
 		public Image CardImage { get; set; }
+		public bool IsTurned { get; set; }
 
 		public Card()
 		{

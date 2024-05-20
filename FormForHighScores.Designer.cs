@@ -132,9 +132,7 @@ namespace SriapButForms
 			this.tableHighScores.AllowUserToOrderColumns = true;
 			dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.ControlDarkDark;
 			this.tableHighScores.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-			this.tableHighScores.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+			this.tableHighScores.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
 			this.tableHighScores.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.tableHighScores.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
 			this.tableHighScores.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
@@ -150,7 +148,7 @@ namespace SriapButForms
 			this.tableHighScores.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ColumnScore,
             this.ColumnUser});
-			this.tableHighScores.Location = new System.Drawing.Point(331, 169);
+			this.tableHighScores.Location = new System.Drawing.Point(344, 170);
 			this.tableHighScores.Name = "tableHighScores";
 			this.tableHighScores.RowHeadersVisible = false;
 			this.tableHighScores.RowTemplate.Height = 25;

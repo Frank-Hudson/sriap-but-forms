@@ -37,6 +37,8 @@ namespace SriapButForms
 
 		const int POINTS_FOR_A_MATCH = 3;
 
+		const int CARD_TURNED_PAUSE = 1000;
+
 		// ---- Images ---- //
 
 		readonly Image[] CardImages = new Image[IMAGE_COUNT];
@@ -100,23 +102,13 @@ namespace SriapButForms
 			int[] usableImageIndices = remainingImages
 				.Where((numberItem, index) => numberItem != secondExcludedImageIndex).ToArray();
 
-			appLog.LogFill($"Images To Be Used: {string.Join(',', usableImageIndices)}");
-
 			List<int> usableImages = usableImageIndices.Concat(usableImageIndices).ToList();
 			List<int> usedImages = new(CARD_COUNT);
 
 			for (int i = 0; i < CARD_COUNT; i++)
 			{
-				appLog.LogFill($"i: {i}");
-				appLog.LogFill($"Usable: {string.Join(',', usableImages)}");
-				appLog.LogFill($"Used: {string.Join(',', usedImages)}");
-
 				int currentImageIndex = randomGenerator.Next(0, usableImages.Count);
 				usedImages.Add(usableImages[currentImageIndex] + 1);
-
-				appLog.LogFill($"Current: {currentImageIndex}");
-				appLog.LogFill($"Used: {string.Join(',', usedImages)}");
-				appLog.LogFill($"Usable: {string.Join(',', usableImages)}");
 
 				Point cardLocation = GetCardLocation(i);
 
@@ -131,7 +123,7 @@ namespace SriapButForms
 					BackgroundImageLayout = ImageLayout.Center,
 					Anchor = AnchorStyles.None,
 					Cursor = Cursors.Hand,
-					Tag = Card.UNTURNED + $"|{currentImageIndex + 1}",
+					Tag = $"{currentImageIndex + 1}",
 					Name = $"Card {i + 1}",
 					Parent = this,
 				};
@@ -144,12 +136,13 @@ namespace SriapButForms
 
 		private void card_Click(object sender, EventArgs e)
 		{
-			Card clickedCard = (sender as Card);
+			Card clickedCard = sender as Card;
 
-			string[] tags = ((string)clickedCard.Tag).Split('|');
+			string tags = (string)clickedCard.Tag;
 
-			if (tags[0] == Card.TURNED) return;
-
+			if (clickedCard.IsTurned) return;
+			
+			clickedCard.IsTurned = true;
 			clickedCard.Image = clickedCard.CardImage;
 
 			Timer timer = new() { Interval = 1000, };
@@ -157,9 +150,9 @@ namespace SriapButForms
 
 			if (!IsFirstGuess)
 			{
-				// timeout (3000)
+				PublicItems.Wait(CARD_TURNED_PAUSE);
 
-				if (tags[1] == ((string)FirstTurned.Tag).Split('|')[1])
+				if (tags == (string)FirstTurned.Tag)
 				{
 					clickedCard.Hide();
 					FirstTurned.Hide();
@@ -171,6 +164,10 @@ namespace SriapButForms
 					clickedCard.Image = null;
 					FirstTurned.Image = null;
 				}
+
+				clickedCard.IsTurned = false;
+				FirstTurned = null;
+				IsFirstGuess = true;
 			}
 			else
 			{
@@ -178,7 +175,6 @@ namespace SriapButForms
 			}
 
 			IsFirstGuess = false;
-			appLog.LogFill($"{clickedCard.Name} (Image {tags[1]}, Pos {clickedCard.Location}) clicked");
 		}
 
 		private void buttonQuit_Click(object sender, EventArgs e)
