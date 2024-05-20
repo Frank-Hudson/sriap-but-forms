@@ -38,6 +38,11 @@ namespace SriapButForms
 			GoToForm(PublicItems.formSettings);
 		}
 
+		private void buttonAbout_Click(object sender, EventArgs e)
+		{
+			PublicItems.formAbout.Show();
+		}
+
 		private void buttonQuit_Click(object sender, EventArgs e)
 		{
 			PublicItems.Quit(sender, e);

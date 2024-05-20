@@ -8,10 +8,12 @@
     <Version>0.1.0</Version>
     <Authors>Frank Hudson, Coleg y Cymoedd</Authors>
     <Company>Coleg y Cymoedd</Company>
-    <Description>A simple pairs game application, built in the windows forms C# framework.</Description>
+    <Description>A simple pairs game application, built in the windows forms C# framework.
+.krowemarf #C smrof swodniw eht ni tliub ,noitacilppa emag sriap elpmis A</Description>
     <PackageIcon>icon_2.png</PackageIcon>
     <PackageIconUrl />
     <RepositoryUrl>https://github.com/Frank-Hudson/sriap-but-forms</RepositoryUrl>
+    <Copyright>No Copyright</Copyright>
   </PropertyGroup>
 
   <ItemGroup>

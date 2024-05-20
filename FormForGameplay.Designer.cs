@@ -78,11 +78,10 @@ namespace SriapButForms
 			this.listBoxLog.Font = new System.Drawing.Font("Consolas", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
 			this.listBoxLog.FormattingEnabled = true;
 			this.listBoxLog.ItemHeight = 10;
-			this.listBoxLog.Location = new System.Drawing.Point(534, 146);
+			this.listBoxLog.Location = new System.Drawing.Point(634, 146);
 			this.listBoxLog.Name = "listBoxLog";
-			this.listBoxLog.Size = new System.Drawing.Size(414, 324);
+			this.listBoxLog.Size = new System.Drawing.Size(296, 324);
 			this.listBoxLog.TabIndex = 2;
-			this.listBoxLog.Visible = false;
 			this.listBoxLog.SelectedIndexChanged += new System.EventHandler(this.listBoxLog_SelectedIndexChanged);
 			// 
 			// labelSelectedLog
@@ -91,13 +90,12 @@ namespace SriapButForms
 			this.labelSelectedLog.BackColor = System.Drawing.Color.Transparent;
 			this.labelSelectedLog.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
 			this.labelSelectedLog.ForeColor = System.Drawing.Color.White;
-			this.labelSelectedLog.Location = new System.Drawing.Point(534, 94);
+			this.labelSelectedLog.Location = new System.Drawing.Point(634, 94);
 			this.labelSelectedLog.Name = "labelSelectedLog";
-			this.labelSelectedLog.Size = new System.Drawing.Size(414, 46);
+			this.labelSelectedLog.Size = new System.Drawing.Size(296, 46);
 			this.labelSelectedLog.TabIndex = 3;
 			this.labelSelectedLog.Text = "<selected log>";
 			this.labelSelectedLog.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			this.labelSelectedLog.Visible = false;
 			// 
 			// buttonBack
 			// 

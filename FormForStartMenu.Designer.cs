@@ -86,6 +86,7 @@ namespace SriapButForms
 			this.buttonAbout.TabIndex = 4;
 			this.buttonAbout.Text = "About";
 			this.buttonAbout.UseVisualStyleBackColor = false;
+			this.buttonAbout.Click += new System.EventHandler(this.buttonAbout_Click);
 			// 
 			// buttonSettings
 			// 

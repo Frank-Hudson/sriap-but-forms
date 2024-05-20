@@ -13,6 +13,7 @@ namespace SriapButForms
 		public static FormForGameplay formGameplay = new();
 		public static FormForHighScores formHighScores = new();
 		public static FormForSettings formSettings = new();
+		public static About formAbout = new();
 
 
 		/// <summary>

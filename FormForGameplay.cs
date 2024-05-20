@@ -123,7 +123,7 @@ namespace SriapButForms
 					BackgroundImageLayout = ImageLayout.Center,
 					Anchor = AnchorStyles.None,
 					Cursor = Cursors.Hand,
-					Tag = $"{currentImageIndex + 1}",
+					Tag = $"{usableImages[currentImageIndex] + 1}",
 					Name = $"Card {i + 1}",
 					Parent = this,
 				};
@@ -140,9 +140,11 @@ namespace SriapButForms
 
 			string tags = (string)clickedCard.Tag;
 
+			appLog.LogFill($"Tag: {tags}, Turned?: {clickedCard.IsTurned}");
+
 			if (clickedCard.IsTurned) return;
-			
-			clickedCard.IsTurned = true;
+			else clickedCard.IsTurned = true;
+
 			clickedCard.Image = clickedCard.CardImage;
 
 			Timer timer = new() { Interval = 1000, };
@@ -150,31 +152,51 @@ namespace SriapButForms
 
 			if (!IsFirstGuess)
 			{
+				// #### 2nd guess ####
+
 				PublicItems.Wait(CARD_TURNED_PAUSE);
 
 				if (tags == (string)FirstTurned.Tag)
 				{
+					// ## Cards match ##
+
+					appLog.LogFill("Cards MATCH!", LogLevel.Info);
+
 					clickedCard.Hide();
+					clickedCard.IsTurned = false;
 					FirstTurned.Hide();
+					FirstTurned.IsTurned = false;
 
 					PlayerScore += POINTS_FOR_A_MATCH;
 				}
 				else
 				{
+					// ## Cards don't match ##
+
+					appLog.LogFill("Cards DON'T MATCH!", LogLevel.Info);
+
 					clickedCard.Image = null;
 					FirstTurned.Image = null;
 				}
 
 				clickedCard.IsTurned = false;
-				FirstTurned = null;
+				FirstTurned.IsTurned = false;
 				IsFirstGuess = true;
 			}
 			else
 			{
-				FirstTurned = clickedCard;
-			}
+				// #### 1st guess ####
 
-			IsFirstGuess = false;
+				appLog.LogFill("1st guess!", LogLevel.Info);
+
+				FirstTurned = clickedCard;
+				IsFirstGuess = false;
+			}
+		}
+
+		private void buttonBack_Click(object sender, EventArgs e)
+		{
+			PublicItems.BackToStart(this, sender, e);
 		}
 
 		private void buttonQuit_Click(object sender, EventArgs e)
@@ -185,11 +207,6 @@ namespace SriapButForms
 		private void listBoxLog_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			labelSelectedLog.Text = (sender as ListBox).SelectedItem.ToString();
-		}
-
-		private void buttonBack_Click(object sender, EventArgs e)
-		{
-			PublicItems.BackToStart(this, sender, e);
 		}
 	}
 }
