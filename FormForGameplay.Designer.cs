@@ -37,6 +37,7 @@ namespace SriapButForms
 			this.appLog = new SriapButForms.AppLog(this.components);
 			this.labelSelectedLog = new System.Windows.Forms.Label();
 			this.buttonBack = new System.Windows.Forms.Button();
+			this.labelScore = new System.Windows.Forms.Label();
 			((System.ComponentModel.ISupportInitialize)(this.pictureTitle)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -116,12 +117,26 @@ namespace SriapButForms
 			this.buttonBack.UseVisualStyleBackColor = false;
 			this.buttonBack.Click += new System.EventHandler(this.buttonBack_Click);
 			// 
+			// labelScore
+			// 
+			this.labelScore.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+			this.labelScore.BackColor = System.Drawing.Color.Transparent;
+			this.labelScore.Font = new System.Drawing.Font("JetBrains Mono SemiBold", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+			this.labelScore.ForeColor = System.Drawing.Color.White;
+			this.labelScore.Location = new System.Drawing.Point(396, 460);
+			this.labelScore.Name = "labelScore";
+			this.labelScore.Size = new System.Drawing.Size(166, 38);
+			this.labelScore.TabIndex = 5;
+			this.labelScore.Text = "Score 0";
+			this.labelScore.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			// 
 			// FormForGameplay
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
 			this.ClientSize = new System.Drawing.Size(960, 540);
+			this.Controls.Add(this.labelScore);
 			this.Controls.Add(this.buttonBack);
 			this.Controls.Add(this.labelSelectedLog);
 			this.Controls.Add(this.listBoxLog);
@@ -147,6 +162,7 @@ namespace SriapButForms
 		private AppLog appLog;
 		private System.Windows.Forms.Label labelSelectedLog;
 		private System.Windows.Forms.Button buttonBack;
+		private System.Windows.Forms.Label labelScore;
 	}
 }
 

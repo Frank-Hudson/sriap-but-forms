@@ -62,6 +62,12 @@ namespace SriapButForms
 			InitializeComponent();
 		}
 
+		void UpdatePlayerScore(int value)
+		{
+			PlayerScore += value;
+			labelScore.Text = $"Score {PlayerScore}";
+		}
+
 		Point GetCardLocation(int index)
 		{
 			int row = (index / CARD_COLUMNS) + 1;
@@ -167,7 +173,7 @@ namespace SriapButForms
 					FirstTurned.Hide();
 					FirstTurned.IsTurned = false;
 
-					PlayerScore += POINTS_FOR_A_MATCH;
+					UpdatePlayerScore(POINTS_FOR_A_MATCH);
 				}
 				else
 				{
