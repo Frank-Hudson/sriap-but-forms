@@ -4,6 +4,14 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net5.0-windows</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
+    <ApplicationIcon>icon_2.ico</ApplicationIcon>
+    <Version>0.1.0</Version>
+    <Authors>Frank Hudson, Coleg y Cymoedd</Authors>
+    <Company>Coleg y Cymoedd</Company>
+    <Description>A simple pairs game application, built in the windows forms C# framework.</Description>
+    <PackageIcon>icon_2.png</PackageIcon>
+    <PackageIconUrl />
+    <RepositoryUrl>https://github.com/Frank-Hudson/sriap-but-forms</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>
@@ -20,6 +28,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Update="Properties\Settings.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
@@ -27,6 +40,20 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Assets\icon_2.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
 
 </Project>

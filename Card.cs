@@ -8,8 +8,10 @@ namespace SriapButForms
 	{
 		public const string TURNED = "turned";
 		public const string UNTURNED = "unturned";
-		public static readonly Image DEFAULT = Image.FromFile(@"Assets/CardTemplate.png");
-		public static readonly Image ERROR = Image.FromFile(@"Assets/CardError.png");
+		public static readonly Image DEFAULT = Properties.Resources.CardTemplate;
+		public static readonly Image ERROR = Properties.Resources.CardError;
+
+		public Image CardImage { get; set; }
 
 		public Card()
 		{

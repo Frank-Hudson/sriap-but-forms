@@ -23,34 +23,35 @@ namespace SriapButForms
 		// ---- CONSTANTS ---- //
 
 		const int IMAGE_COUNT = 10;
+		
 		const int CARD_ROWS = 4;
 		const int CARD_COLUMNS = 4;
 		const int CARD_COUNT = CARD_ROWS * CARD_COLUMNS;
+		const int PAIR_COUNT = CARD_COUNT / PAIRS;
+
 		const int CARD_WIDTH = 158;
 		const int CARD_HEIGHT = 202;
-		const int CARD_DISTANCE = 10;
+		
+		const int CARD_DISTANCE_HORIZONTAL = 25;
+		const int CARD_DISTANCE_VERTICAL = 15;
+
+		const int POINTS_FOR_A_MATCH = 3;
 
 		// ---- Images ---- //
 
 		readonly Image[] CardImages = new Image[IMAGE_COUNT];
-		readonly Image[] IncludedImages = new Image[CARD_COUNT / PAIRS];
-		int[] SelectedImages = new int[CARD_COUNT];
-
+		
 		// ---- Cards ---- //
 
 		readonly Color CARD_COLOUR = Color.FromArgb(0x00, 0xED, 0xF2);
 		readonly Card[] CardComponents = new Card[CARD_COUNT];
 		Point CARD_0_LOCATION;
+		Card FirstTurned;
 
 		// ---- Gameplay ---- //
 
 		bool IsFirstGuess = true;
-
-		// ---- buttonQuit ---- //
-
-		readonly FontFamily QuitFontFamily = new("JetBrains Mono");
-		readonly FontStyle QuitFontStyle = FontStyle.Italic;
-		int QuitCount = 0;
+		int PlayerScore = 0;
 
 		// ---- #### ---- METHODS ---- #### ---- //
 
@@ -67,8 +68,8 @@ namespace SriapButForms
 			//appLog.LogFill($"Card {index + 1} gridpos: {row}, {column}");
 
 			return new Point(
-				CARD_0_LOCATION.X + ((CARD_WIDTH + CARD_DISTANCE) * row),
-				CARD_0_LOCATION.Y + ((CARD_HEIGHT + CARD_DISTANCE) * column)
+				CARD_0_LOCATION.X + ((CARD_WIDTH + CARD_DISTANCE_HORIZONTAL) * row) - CARD_WIDTH,
+				CARD_0_LOCATION.Y + ((CARD_HEIGHT + CARD_DISTANCE_VERTICAL) * column) - CARD_HEIGHT
 			);
 		}
 
@@ -78,7 +79,12 @@ namespace SriapButForms
 
 			appLog.output = listBoxLog;
 
-			CARD_0_LOCATION = new((Size.Width / 2) - ((CARD_WIDTH + CARD_DISTANCE) * 2), 5);
+			appLog.LogFill($"Window: {Size.Width} x {Size.Height}");
+
+			CARD_0_LOCATION = new(
+				(Size.Width / 2) - ((CARD_WIDTH + CARD_DISTANCE_HORIZONTAL) * 2),
+				pictureTitle.Height
+			);
 
 			appLog.LogFill($"Card scale: {CARD_WIDTH} x {CARD_HEIGHT}");
 
@@ -87,77 +93,107 @@ namespace SriapButForms
 				CardImages[i] = Image.FromFile($"Assets/Card{i + 1}.png");
 			}
 
+			int firstExcludedImageIndex = randomGenerator.Next(IMAGE_COUNT) + 1;
+			int[] remainingImages = Enumerable.Range(1, IMAGE_COUNT)
+				.Where(numberItem => numberItem != firstExcludedImageIndex).ToArray();
+			int secondExcludedImageIndex = remainingImages[randomGenerator.Next(IMAGE_COUNT - 1)];
+			int[] usableImageIndices = remainingImages
+				.Where((numberItem, index) => numberItem != secondExcludedImageIndex).ToArray();
+
+			appLog.LogFill($"Images To Be Used: {string.Join(',', usableImageIndices)}");
+
+			List<int> usableImages = usableImageIndices.Concat(usableImageIndices).ToList();
+			List<int> usedImages = new(CARD_COUNT);
+
 			for (int i = 0; i < CARD_COUNT; i++)
 			{
-				int[] unselectedImages = Enumerable.Range(0, IMAGE_COUNT)
-					// Find each from SelectedImages occurring twice and check if `i` is one
-					.Where(i => !(SelectedImages
-						.GroupBy(i2 => i2)
-						.Where(i2 => i2.Count() >= PAIRS)
-						.Select(i2 => i2.First()).Contains(i)))
-					.ToArray();
-				int unselectedImageIndex = randomGenerator.Next(0, unselectedImages.Count());
-				int cardImageIndex = unselectedImages.ElementAt(unselectedImageIndex);
-				SelectedImages[i] = unselectedImageIndex + 1;
+				appLog.LogFill($"i: {i}");
+				appLog.LogFill($"Usable: {string.Join(',', usableImages)}");
+				appLog.LogFill($"Used: {string.Join(',', usedImages)}");
 
-				appLog.LogFill($"Unselected: {string.Join(',', unselectedImages)}");
-				appLog.LogFill($"Selected: {string.Join(',', SelectedImages)}");
+				int currentImageIndex = randomGenerator.Next(0, usableImages.Count);
+				usedImages.Add(usableImages[currentImageIndex] + 1);
+
+				appLog.LogFill($"Current: {currentImageIndex}");
+				appLog.LogFill($"Used: {string.Join(',', usedImages)}");
+				appLog.LogFill($"Usable: {string.Join(',', usableImages)}");
 
 				Point cardLocation = GetCardLocation(i);
-
-				//appLog.LogFill($"Card {i + 1} pos: ({cardLocation.X}, {cardLocation.Y})");
 
 				CardComponents[i] = new()
 				{
 					Location = cardLocation,
 					Size = new(CARD_WIDTH, CARD_HEIGHT),
-					//BackColor = CARD_COLOUR,
-					Image = CardImages[cardImageIndex],
+					BackColor = CARD_COLOUR,
+					CardImage = CardImages[usableImages[currentImageIndex] - 1],
 					InitialImage = Card.DEFAULT,
 					ErrorImage = Card.ERROR,
+					BackgroundImageLayout = ImageLayout.Center,
 					Anchor = AnchorStyles.None,
-					Tag = Card.UNTURNED,
+					Cursor = Cursors.Hand,
+					Tag = Card.UNTURNED + $"|{currentImageIndex + 1}",
 					Name = $"Card {i + 1}",
 					Parent = this,
 				};
-				CardComponents[i].Click += new EventHandler(this.card_Click);
+				CardComponents[i].Click += new EventHandler(card_Click);
 				CardComponents[i].Show();
+
+				usableImages.RemoveAt(currentImageIndex);
 			}
 		}
 
-		private void card_Click(object sender, EventArgs e) {
-			if ((string)(sender as Card).Tag == Card.TURNED) return;
+		private void card_Click(object sender, EventArgs e)
+		{
+			Card clickedCard = (sender as Card);
 
-			(sender as Card).InitialImage = (sender as Card).BackgroundImage;
+			string[] tags = ((string)clickedCard.Tag).Split('|');
+
+			if (tags[0] == Card.TURNED) return;
+
+			clickedCard.Image = clickedCard.CardImage;
+
+			Timer timer = new() { Interval = 1000, };
+			timer.Start();
 
 			if (!IsFirstGuess)
 			{
-				Timer timer = new Timer { Interval = 1000, };
+				// timeout (3000)
+
+				if (tags[1] == ((string)FirstTurned.Tag).Split('|')[1])
+				{
+					clickedCard.Hide();
+					FirstTurned.Hide();
+
+					PlayerScore += POINTS_FOR_A_MATCH;
+				}
+				else
+				{
+					clickedCard.Image = null;
+					FirstTurned.Image = null;
+				}
+			}
+			else
+			{
+				FirstTurned = clickedCard;
 			}
 
 			IsFirstGuess = false;
-			appLog.LogFill($"Card {(sender as Card).Name} clicked");
+			appLog.LogFill($"{clickedCard.Name} (Image {tags[1]}, Pos {clickedCard.Location}) clicked");
 		}
 
 		private void buttonQuit_Click(object sender, EventArgs e)
 		{
-			switch (QuitCount)
-			{
-				case 0:
-					buttonQuit.Font = new(QuitFontFamily, 9, QuitFontStyle);
-					buttonQuit.Text = "Let me leave";
-					QuitCount++;
-					break;
-				case 2:
-					buttonQuit.Font = new(QuitFontFamily, 8, QuitFontStyle);
-					buttonQuit.Text = "Let Me Push The Frickin' Button!";
-					QuitCount++;
-					break;
-				default:
-					AutoClosingMessageBox.Show("Good bye.", timeout: 900);
-					Application.Exit();
-					break;
-			}
+			PublicItems.Quit(sender, e);
+		}
+
+		private void listBoxLog_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			labelSelectedLog.Text = (sender as ListBox).SelectedItem.ToString();
+		}
+
+		private void buttonBack_Click(object sender, EventArgs e)
+		{
+			PublicItems.BackToStart(this, sender, e);
 		}
 	}
 }

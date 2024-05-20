@@ -43,7 +43,7 @@ namespace SriapButForms
 
 		public void Log(string message, LogLevel level = LogLevel.Debug)
 		{
-			this.logs.Add($"{DateTime.Now:s} [{level}] {message}");
+			this.logs.Insert(0, $"{DateTime.Now:s} [{level}] {message}");
 		}
 
 		public void LogFill(string message, LogLevel level = LogLevel.Debug)
@@ -54,7 +54,7 @@ namespace SriapButForms
 
 		public void FillLatestLog()
 		{
-			this.output.Items.Add(this.logs.Last());
+			this.output.Items.Insert(0, this.logs.First());
 		}
 
 		public void FillOutput()
@@ -63,6 +63,11 @@ namespace SriapButForms
 			{
 				this.output.Items.Add(log);
 			}
+		}
+
+		public override string ToString()
+		{
+			return base.ToString();
 		}
 
 		public AppLog()

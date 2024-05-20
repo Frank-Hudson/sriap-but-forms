@@ -17,7 +17,7 @@ namespace SriapButForms
 			Application.SetHighDpiMode(HighDpiMode.SystemAware);
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
-			Application.Run(new FormForGameplay());
+			Application.Run(new FormForStartMenu());
 		}
 	}
 }

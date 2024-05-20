@@ -1,0 +1,11 @@
+{
+	"card_grid": {
+		"x": 4,
+		"y": 4
+	},
+	"images": {
+		"allowed": 8,
+		"total": 10
+	},
+	"duplicates": 2
+}
