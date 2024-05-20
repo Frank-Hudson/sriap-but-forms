@@ -82,6 +82,7 @@ namespace SriapButForms
 			this.listBoxLog.Name = "listBoxLog";
 			this.listBoxLog.Size = new System.Drawing.Size(296, 324);
 			this.listBoxLog.TabIndex = 2;
+			this.listBoxLog.Visible = false;
 			this.listBoxLog.SelectedIndexChanged += new System.EventHandler(this.listBoxLog_SelectedIndexChanged);
 			// 
 			// labelSelectedLog
@@ -96,6 +97,7 @@ namespace SriapButForms
 			this.labelSelectedLog.TabIndex = 3;
 			this.labelSelectedLog.Text = "<selected log>";
 			this.labelSelectedLog.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			this.labelSelectedLog.Visible = false;
 			// 
 			// buttonBack
 			// 
