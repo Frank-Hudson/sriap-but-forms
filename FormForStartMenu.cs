@@ -47,5 +47,10 @@ namespace SriapButForms
 		{
 			PublicItems.Quit(sender, e);
 		}
+
+		private void FormForStartMenu_FormClosed(object sender, FormClosedEventArgs e)
+		{
+			PublicItems.Quit(sender, e);
+		}
 	}
 }

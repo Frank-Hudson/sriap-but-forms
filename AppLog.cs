@@ -13,16 +13,15 @@ namespace SriapButForms
 	{
 		public static string ToString(this LogLevel logLevel)
 		{
-			switch (logLevel)
+			return logLevel switch
 			{
-				case LogLevel.Debug: return "Debug";
-				case LogLevel.Info: return "Info";
-				case LogLevel.Warn: return "Warn";
-				case LogLevel.Err: return "Err";
-				case LogLevel.Crit: return "Crit";
-				case LogLevel.None:
-				default: return "None";
-			}
+				LogLevel.Debug => "Debug",
+				LogLevel.Info => "Info",
+				LogLevel.Warn => "Warn",
+				LogLevel.Err => "Err",
+				LogLevel.Crit => "Crit",
+				_ => "None",
+			};
 		}
 	}
 

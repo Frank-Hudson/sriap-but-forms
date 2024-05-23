@@ -33,9 +33,7 @@ namespace SriapButForms
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormForGameplay));
 			this.pictureTitle = new System.Windows.Forms.PictureBox();
 			this.buttonQuit = new System.Windows.Forms.Button();
-			this.listBoxLog = new System.Windows.Forms.ListBox();
 			this.appLog = new SriapButForms.AppLog(this.components);
-			this.labelSelectedLog = new System.Windows.Forms.Label();
 			this.buttonBack = new System.Windows.Forms.Button();
 			this.labelScore = new System.Windows.Forms.Label();
 			((System.ComponentModel.ISupportInitialize)(this.pictureTitle)).BeginInit();
@@ -72,34 +70,6 @@ namespace SriapButForms
 			this.buttonQuit.UseVisualStyleBackColor = false;
 			this.buttonQuit.Click += new System.EventHandler(this.buttonQuit_Click);
 			// 
-			// listBoxLog
-			// 
-			this.listBoxLog.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.listBoxLog.Font = new System.Drawing.Font("Consolas", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-			this.listBoxLog.FormattingEnabled = true;
-			this.listBoxLog.ItemHeight = 10;
-			this.listBoxLog.Location = new System.Drawing.Point(634, 146);
-			this.listBoxLog.Name = "listBoxLog";
-			this.listBoxLog.Size = new System.Drawing.Size(296, 324);
-			this.listBoxLog.TabIndex = 2;
-			this.listBoxLog.Visible = false;
-			this.listBoxLog.SelectedIndexChanged += new System.EventHandler(this.listBoxLog_SelectedIndexChanged);
-			// 
-			// labelSelectedLog
-			// 
-			this.labelSelectedLog.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.labelSelectedLog.BackColor = System.Drawing.Color.Transparent;
-			this.labelSelectedLog.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-			this.labelSelectedLog.ForeColor = System.Drawing.Color.White;
-			this.labelSelectedLog.Location = new System.Drawing.Point(634, 94);
-			this.labelSelectedLog.Name = "labelSelectedLog";
-			this.labelSelectedLog.Size = new System.Drawing.Size(296, 46);
-			this.labelSelectedLog.TabIndex = 3;
-			this.labelSelectedLog.Text = "<selected log>";
-			this.labelSelectedLog.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			this.labelSelectedLog.Visible = false;
-			// 
 			// buttonBack
 			// 
 			this.buttonBack.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -121,7 +91,7 @@ namespace SriapButForms
 			// 
 			this.labelScore.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
 			this.labelScore.BackColor = System.Drawing.Color.Transparent;
-			this.labelScore.Font = new System.Drawing.Font("JetBrains Mono SemiBold", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+			this.labelScore.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
 			this.labelScore.ForeColor = System.Drawing.Color.White;
 			this.labelScore.Location = new System.Drawing.Point(396, 460);
 			this.labelScore.Name = "labelScore";
@@ -138,8 +108,6 @@ namespace SriapButForms
 			this.ClientSize = new System.Drawing.Size(960, 540);
 			this.Controls.Add(this.labelScore);
 			this.Controls.Add(this.buttonBack);
-			this.Controls.Add(this.labelSelectedLog);
-			this.Controls.Add(this.listBoxLog);
 			this.Controls.Add(this.buttonQuit);
 			this.Controls.Add(this.pictureTitle);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -158,9 +126,7 @@ namespace SriapButForms
 
 		private System.Windows.Forms.PictureBox pictureTitle;
 		private System.Windows.Forms.Button buttonQuit;
-		private System.Windows.Forms.ListBox listBoxLog;
 		private AppLog appLog;
-		private System.Windows.Forms.Label labelSelectedLog;
 		private System.Windows.Forms.Button buttonBack;
 		private System.Windows.Forms.Label labelScore;
 	}

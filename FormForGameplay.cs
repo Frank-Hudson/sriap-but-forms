@@ -37,7 +37,7 @@ namespace SriapButForms
 
 		const int POINTS_FOR_A_MATCH = 3;
 
-		const int CARD_TURNED_PAUSE = 1000;
+		const int CARD_TURNED_PAUSE = 500;
 
 		// ---- Images ---- //
 
@@ -54,6 +54,8 @@ namespace SriapButForms
 
 		bool IsFirstGuess = true;
 		int PlayerScore = 0;
+		int Guesses = 0;
+		int CorrectGuesses = 0;
 
 		// ---- #### ---- METHODS ---- #### ---- //
 
@@ -66,6 +68,12 @@ namespace SriapButForms
 		{
 			PlayerScore += value;
 			labelScore.Text = $"Score {PlayerScore}";
+		}
+
+		void BroadcastWin(int score, bool win)
+		{
+			FormForGameplayFinish formGameplayFinish = new(score, win);
+			if (formGameplayFinish.ShowDialog() == DialogResult.Retry) SetupGameplay(new());
 		}
 
 		Point GetCardLocation(int index)
@@ -81,25 +89,12 @@ namespace SriapButForms
 			);
 		}
 
-		private void FormForGameplay_Load(object sender, EventArgs e)
+		void SetupGameplay(Random randomGenerator)
 		{
-			Random randomGenerator = new();
-
-			appLog.output = listBoxLog;
-
-			appLog.LogFill($"Window: {Size.Width} x {Size.Height}");
-
-			CARD_0_LOCATION = new(
-				(Size.Width / 2) - ((CARD_WIDTH + CARD_DISTANCE_HORIZONTAL) * 2),
-				pictureTitle.Height
-			);
-
-			appLog.LogFill($"Card scale: {CARD_WIDTH} x {CARD_HEIGHT}");
-
-			for (int i = 0; i < IMAGE_COUNT; i++)
-			{
-				CardImages[i] = Image.FromFile($"Assets/Card{i + 1}.png");
-			}
+			PlayerScore = 0;
+			labelScore.Text = $"Score {PlayerScore}";
+			Guesses = 0;
+			CorrectGuesses = 0;
 
 			int firstExcludedImageIndex = randomGenerator.Next(IMAGE_COUNT) + 1;
 			int[] remainingImages = Enumerable.Range(1, IMAGE_COUNT)
@@ -140,6 +135,29 @@ namespace SriapButForms
 			}
 		}
 
+		private void FormForGameplay_Load(object sender, EventArgs e)
+		{
+			Random randomGenerator = new();
+
+			appLog.output = new();
+
+			appLog.LogFill($"Window: {Size.Width} x {Size.Height}");
+
+			CARD_0_LOCATION = new(
+				(Size.Width / 2) - ((CARD_WIDTH + CARD_DISTANCE_HORIZONTAL) * 2),
+				pictureTitle.Height
+			);
+
+			appLog.LogFill($"Card scale: {CARD_WIDTH} x {CARD_HEIGHT}");
+
+			for (int i = 0; i < IMAGE_COUNT; i++)
+			{
+				CardImages[i] = Image.FromFile($"Assets/Card{i + 1}.png");
+			}
+
+			SetupGameplay(randomGenerator);
+		}
+
 		private void card_Click(object sender, EventArgs e)
 		{
 			Card clickedCard = sender as Card;
@@ -156,6 +174,8 @@ namespace SriapButForms
 			Timer timer = new() { Interval = 1000, };
 			timer.Start();
 
+			Guesses++;
+
 			if (!IsFirstGuess)
 			{
 				// #### 2nd guess ####
@@ -168,12 +188,19 @@ namespace SriapButForms
 
 					appLog.LogFill("Cards MATCH!", LogLevel.Info);
 
+					CorrectGuesses++;
+
 					clickedCard.Hide();
 					clickedCard.IsTurned = false;
 					FirstTurned.Hide();
 					FirstTurned.IsTurned = false;
 
 					UpdatePlayerScore(POINTS_FOR_A_MATCH);
+
+					if (CorrectGuesses >= PAIR_COUNT)
+					{
+						BroadcastWin(PlayerScore, true);
+					}
 				}
 				else
 				{
@@ -208,11 +235,6 @@ namespace SriapButForms
 		private void buttonQuit_Click(object sender, EventArgs e)
 		{
 			PublicItems.Quit(sender, e);
-		}
-
-		private void listBoxLog_SelectedIndexChanged(object sender, EventArgs e)
-		{
-			labelSelectedLog.Text = (sender as ListBox).SelectedItem.ToString();
 		}
 	}
 }

@@ -157,6 +157,7 @@ namespace SriapButForms
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Sriap";
 			this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormForStartMenu_FormClosed);
 			((System.ComponentModel.ISupportInitialize)(this.pictureTitle)).EndInit();
 			this.ResumeLayout(false);
 
