@@ -36,7 +36,9 @@ namespace SriapButForms
 			this.buttonSettings = new System.Windows.Forms.Button();
 			this.buttonHighScores = new System.Windows.Forms.Button();
 			this.buttonPlay = new System.Windows.Forms.Button();
+			this.pictureCycLogo = new System.Windows.Forms.PictureBox();
 			((System.ComponentModel.ISupportInitialize)(this.pictureTitle)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.pictureCycLogo)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// buttonQuit
@@ -139,12 +141,25 @@ namespace SriapButForms
 			this.buttonPlay.UseVisualStyleBackColor = false;
 			this.buttonPlay.Click += new System.EventHandler(this.buttonPlay_Click);
 			// 
+			// pictureCycLogo
+			// 
+			this.pictureCycLogo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+			this.pictureCycLogo.ErrorImage = global::SriapButForms.Properties.Resources.CardError;
+			this.pictureCycLogo.Image = global::SriapButForms.Properties.Resources.coleg_y_cymoedd_icon_arch_green_on_black;
+			this.pictureCycLogo.Location = new System.Drawing.Point(12, 10);
+			this.pictureCycLogo.Name = "pictureCycLogo";
+			this.pictureCycLogo.Size = new System.Drawing.Size(100, 100);
+			this.pictureCycLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+			this.pictureCycLogo.TabIndex = 8;
+			this.pictureCycLogo.TabStop = false;
+			// 
 			// FormForStartMenu
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
 			this.ClientSize = new System.Drawing.Size(960, 540);
+			this.Controls.Add(this.pictureCycLogo);
 			this.Controls.Add(this.buttonPlay);
 			this.Controls.Add(this.buttonHighScores);
 			this.Controls.Add(this.buttonSettings);
@@ -159,6 +174,7 @@ namespace SriapButForms
 			this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
 			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormForStartMenu_FormClosed);
 			((System.ComponentModel.ISupportInitialize)(this.pictureTitle)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.pictureCycLogo)).EndInit();
 			this.ResumeLayout(false);
 
 		}
@@ -171,5 +187,6 @@ namespace SriapButForms
 		private System.Windows.Forms.Button buttonSettings;
 		private System.Windows.Forms.Button buttonHighScores;
 		private System.Windows.Forms.Button buttonPlay;
+		private System.Windows.Forms.PictureBox pictureCycLogo;
 	}
 }
