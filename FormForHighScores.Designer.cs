@@ -31,6 +31,9 @@ namespace SriapButForms
 		{
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormForHighScores));
 			this.pictureTitle = new System.Windows.Forms.PictureBox();
 			this.labelTitle = new System.Windows.Forms.Label();
@@ -41,6 +44,7 @@ namespace SriapButForms
 			this.tableHighScores = new System.Windows.Forms.DataGridView();
 			this.ColumnScore = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.ColumnUser = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.labelLayoutTitle = new System.Windows.Forms.Label();
 			((System.ComponentModel.ISupportInitialize)(this.pictureTitle)).BeginInit();
 			this.groupHighScoreMode.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.tableHighScores)).BeginInit();
@@ -75,14 +79,16 @@ namespace SriapButForms
 			// groupHighScoreMode
 			// 
 			this.groupHighScoreMode.Anchor = System.Windows.Forms.AnchorStyles.Left;
+			this.groupHighScoreMode.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+			this.groupHighScoreMode.Controls.Add(this.labelLayoutTitle);
 			this.groupHighScoreMode.Controls.Add(this.radioHighScoresModeTable);
 			this.groupHighScoreMode.Controls.Add(this.radioHighScoresModeCards);
 			this.groupHighScoreMode.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.groupHighScoreMode.Font = new System.Drawing.Font("JetBrains Mono", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
 			this.groupHighScoreMode.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-			this.groupHighScoreMode.Location = new System.Drawing.Point(53, 259);
+			this.groupHighScoreMode.Location = new System.Drawing.Point(53, 240);
 			this.groupHighScoreMode.Name = "groupHighScoreMode";
-			this.groupHighScoreMode.Size = new System.Drawing.Size(113, 106);
+			this.groupHighScoreMode.Size = new System.Drawing.Size(113, 125);
 			this.groupHighScoreMode.TabIndex = 3;
 			this.groupHighScoreMode.TabStop = false;
 			// 
@@ -91,7 +97,7 @@ namespace SriapButForms
 			this.radioHighScoresModeTable.AutoSize = true;
 			this.radioHighScoresModeTable.Checked = true;
 			this.radioHighScoresModeTable.ForeColor = System.Drawing.Color.White;
-			this.radioHighScoresModeTable.Location = new System.Drawing.Point(17, 60);
+			this.radioHighScoresModeTable.Location = new System.Drawing.Point(17, 84);
 			this.radioHighScoresModeTable.Name = "radioHighScoresModeTable";
 			this.radioHighScoresModeTable.Size = new System.Drawing.Size(66, 21);
 			this.radioHighScoresModeTable.TabIndex = 1;
@@ -103,7 +109,7 @@ namespace SriapButForms
 			// 
 			this.radioHighScoresModeCards.AutoSize = true;
 			this.radioHighScoresModeCards.ForeColor = System.Drawing.Color.White;
-			this.radioHighScoresModeCards.Location = new System.Drawing.Point(17, 33);
+			this.radioHighScoresModeCards.Location = new System.Drawing.Point(17, 57);
 			this.radioHighScoresModeCards.Name = "radioHighScoresModeCards";
 			this.radioHighScoresModeCards.Size = new System.Drawing.Size(66, 21);
 			this.radioHighScoresModeCards.TabIndex = 0;
@@ -129,12 +135,19 @@ namespace SriapButForms
 			// 
 			// tableHighScores
 			// 
-			this.tableHighScores.AllowUserToOrderColumns = true;
+			this.tableHighScores.AllowUserToAddRows = false;
+			this.tableHighScores.AllowUserToDeleteRows = false;
+			this.tableHighScores.AllowUserToResizeColumns = false;
+			this.tableHighScores.AllowUserToResizeRows = false;
 			dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+			dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
+			dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(188)))), ((int)(((byte)(188)))));
 			this.tableHighScores.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
 			this.tableHighScores.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+			this.tableHighScores.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(69)))), ((int)(((byte)(69)))));
 			this.tableHighScores.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.tableHighScores.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+			this.tableHighScores.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable;
 			this.tableHighScores.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
 			dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
 			dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
@@ -144,30 +157,66 @@ namespace SriapButForms
 			dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White;
 			dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
 			this.tableHighScores.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
-			this.tableHighScores.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.tableHighScores.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
 			this.tableHighScores.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ColumnScore,
             this.ColumnUser});
+			dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.ControlDark;
+			dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+			dataGridViewCellStyle5.ForeColor = System.Drawing.Color.White;
+			dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.Silver;
+			dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+			this.tableHighScores.DefaultCellStyle = dataGridViewCellStyle5;
+			this.tableHighScores.EnableHeadersVisualStyles = false;
 			this.tableHighScores.Location = new System.Drawing.Point(344, 170);
 			this.tableHighScores.Name = "tableHighScores";
+			this.tableHighScores.ReadOnly = true;
 			this.tableHighScores.RowHeadersVisible = false;
+			this.tableHighScores.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
 			this.tableHighScores.RowTemplate.Height = 25;
 			this.tableHighScores.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+			this.tableHighScores.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
 			this.tableHighScores.ShowEditingIcon = false;
 			this.tableHighScores.Size = new System.Drawing.Size(261, 322);
 			this.tableHighScores.TabIndex = 7;
 			// 
 			// ColumnScore
 			// 
+			dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+			dataGridViewCellStyle3.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
+			dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+			this.ColumnScore.DefaultCellStyle = dataGridViewCellStyle3;
 			this.ColumnScore.HeaderText = "Score";
+			this.ColumnScore.MaxInputLength = 4;
 			this.ColumnScore.Name = "ColumnScore";
+			this.ColumnScore.ReadOnly = true;
+			this.ColumnScore.Resizable = System.Windows.Forms.DataGridViewTriState.False;
 			this.ColumnScore.Width = 80;
 			// 
 			// ColumnUser
 			// 
+			dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle4.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
+			dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+			this.ColumnUser.DefaultCellStyle = dataGridViewCellStyle4;
 			this.ColumnUser.HeaderText = "Username";
 			this.ColumnUser.Name = "ColumnUser";
+			this.ColumnUser.ReadOnly = true;
 			this.ColumnUser.Width = 180;
+			// 
+			// labelLayoutTitle
+			// 
+			this.labelLayoutTitle.Anchor = System.Windows.Forms.AnchorStyles.Top;
+			this.labelLayoutTitle.AutoSize = true;
+			this.labelLayoutTitle.Font = new System.Drawing.Font("JetBrains Mono", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+			this.labelLayoutTitle.ForeColor = System.Drawing.Color.White;
+			this.labelLayoutTitle.Location = new System.Drawing.Point(37, 28);
+			this.labelLayoutTitle.Name = "labelLayoutTitle";
+			this.labelLayoutTitle.Size = new System.Drawing.Size(70, 21);
+			this.labelLayoutTitle.TabIndex = 8;
+			this.labelLayoutTitle.Text = "Layout";
 			// 
 			// FormForHighScores
 			// 
@@ -207,5 +256,6 @@ namespace SriapButForms
 		private System.Windows.Forms.DataGridView tableHighScores;
 		private System.Windows.Forms.DataGridViewTextBoxColumn ColumnScore;
 		private System.Windows.Forms.DataGridViewTextBoxColumn ColumnUser;
+		private System.Windows.Forms.Label labelLayoutTitle;
 	}
 }

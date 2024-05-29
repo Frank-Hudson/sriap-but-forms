@@ -42,6 +42,11 @@ namespace SriapButForms
 				return $"{this.score} {this.user}";
 			}
 
+			public int CompareTo(Score other)
+			{
+				return this.score.CompareTo(other.score);
+			}
+
 			public Label GetScoreLabel()
 			{
 				return new()
@@ -95,6 +100,8 @@ namespace SriapButForms
 					MessageBox.Show($"There was an unidentified error parsing scores:\n{er}", "Unidentified Error");
 				}
 			}
+
+			scores = scores.OrderByDescending(s => s.score).ToList();
 
 			for (int i = 0; i < scores.Count; i++)
 			{

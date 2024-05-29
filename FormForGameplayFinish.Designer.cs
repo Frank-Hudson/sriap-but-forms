@@ -121,13 +121,14 @@ namespace SriapButForms
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+			this.CancelButton = this.buttonClose;
 			this.ClientSize = new System.Drawing.Size(268, 321);
 			this.Controls.Add(this.buttonReplay);
 			this.Controls.Add(this.buttonSaveScore);
 			this.Controls.Add(this.labelScore);
 			this.Controls.Add(this.labelStatus);
 			this.Controls.Add(this.buttonClose);
-			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;

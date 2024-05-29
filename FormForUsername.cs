@@ -27,7 +27,7 @@ namespace SriapButForms
 				(string.IsNullOrEmpty(inputUsername.Text) || string.IsNullOrWhiteSpace(inputUsername.Text)) &&
 				MessageBox.Show("Are you sure you don't want to save a username with your score?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.No
 			) return;
-			this.Close();
+			Close();
 		}
 	}
 }

@@ -22,11 +22,13 @@ namespace SriapButForms
 		public FormForGameplayFinish(int score, bool win)
 		{
 			InitializeComponent();
+			DialogResult = DialogResult.None;
+
 			Score = score;
 			Win = win;
 			Status = Win ? "YOU WIN!" : "YOU LOSE!";
 
-			Text = $"{Status} - Sriap";
+			Text = $"GAME OVER - {Status}";
 			labelStatus.Text = Status;
 			labelScore.Text = $"Score {Score}";
 		}
@@ -44,13 +46,12 @@ namespace SriapButForms
 		private void buttonReplay_Click(object sender, EventArgs e)
 		{
 			DialogResult = DialogResult.Retry;
-			this.Close();
+			Close();
 		}
 
 		private void buttonClose_Click(object sender, EventArgs e)
 		{
-			DialogResult = DialogResult.None;
-			this.Close();
+			Close();
 		}
 	}
 }
