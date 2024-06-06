@@ -36,6 +36,7 @@ namespace SriapButForms
 			this.buttonSaveScore = new System.Windows.Forms.Button();
 			this.buttonReplay = new System.Windows.Forms.Button();
 			this.buttonBack = new System.Windows.Forms.Button();
+			this.labelTime = new System.Windows.Forms.Label();
 			this.SuspendLayout();
 			// 
 			// buttonQuit
@@ -76,7 +77,7 @@ namespace SriapButForms
 			this.labelScore.BackColor = System.Drawing.Color.Transparent;
 			this.labelScore.Font = new System.Drawing.Font("JetBrains Mono", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
 			this.labelScore.ForeColor = System.Drawing.Color.White;
-			this.labelScore.Location = new System.Drawing.Point(12, 109);
+			this.labelScore.Location = new System.Drawing.Point(12, 95);
 			this.labelScore.Name = "labelScore";
 			this.labelScore.Size = new System.Drawing.Size(244, 36);
 			this.labelScore.TabIndex = 27;
@@ -134,6 +135,20 @@ namespace SriapButForms
 			this.buttonBack.UseVisualStyleBackColor = false;
 			this.buttonBack.Click += new System.EventHandler(this.buttonBack_Click);
 			// 
+			// labelTime
+			// 
+			this.labelTime.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.labelTime.BackColor = System.Drawing.Color.Transparent;
+			this.labelTime.Font = new System.Drawing.Font("JetBrains Mono", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+			this.labelTime.ForeColor = System.Drawing.Color.White;
+			this.labelTime.Location = new System.Drawing.Point(12, 131);
+			this.labelTime.Name = "labelTime";
+			this.labelTime.Size = new System.Drawing.Size(244, 36);
+			this.labelTime.TabIndex = 31;
+			this.labelTime.Text = "--:--";
+			this.labelTime.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			// 
 			// GameOutcome
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -141,6 +156,7 @@ namespace SriapButForms
 			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
 			this.CancelButton = this.buttonQuit;
 			this.ClientSize = new System.Drawing.Size(268, 321);
+			this.Controls.Add(this.labelTime);
 			this.Controls.Add(this.buttonBack);
 			this.Controls.Add(this.buttonReplay);
 			this.Controls.Add(this.buttonSaveScore);
@@ -168,5 +184,6 @@ namespace SriapButForms
 		private System.Windows.Forms.Button buttonSaveScore;
 		private System.Windows.Forms.Button buttonReplay;
 		private System.Windows.Forms.Button buttonBack;
+		private System.Windows.Forms.Label labelTime;
 	}
 }

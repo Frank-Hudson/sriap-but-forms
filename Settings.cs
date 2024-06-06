@@ -47,31 +47,45 @@ namespace SriapButForms
 			}
 			catch (JsonSerializationException jse)
 			{
-				MessageBox.Show($"There was an error serializing the settings JSON:\n{jse}", "JSON Serialization Error");
+				MessageBox.Show($"There was an error serializing the settings JSON:\n{jse.Message}", "JSON Serialization Error");
+				Application.Exit();
 			}
 			catch (PathTooLongException pe)
 			{
-				MessageBox.Show($"The path for the settings file was too long:\n{pe}", "Path Error");
+				MessageBox.Show($"The path for the settings file was too long:\n{pe.Message}", "Path Error");
+				Application.Exit();
 			}
 			catch (FileNotFoundException fe)
 			{
-				MessageBox.Show($"The file in the path provided while opening settings was not found:\n{fe}", "File Error");
+				MessageBox.Show($"The file in the path provided while opening settings was not found:\n{fe.Message}", "File Error");
+				Application.Exit();
 			}
 			catch (DirectoryNotFoundException de)
 			{
-				MessageBox.Show($"The directory in the path provided while opening settings was not found:\n{de}", "Directory Error");
+				if (de.Message.Contains("settings.json"))
+				{
+					MessageBox.Show($"The `Data/settings.json` file is missing, please place the Data directory at the program's root\n({AppDomain.CurrentDomain.BaseDirectory}).\n\nThe relevant files can be found here: https://github.com/Frank-Hudson/sriap-but-forms/tree/master/Data", "Missing Files");
+				}
+				else
+				{
+					MessageBox.Show($"The directory in the path provided while opening settings was not found:\n{de.Message}", "Directory Error");
+				}
+				Application.Exit();
 			}
 			catch (UnauthorizedAccessException ae)
 			{
-				MessageBox.Show($"Access is not permitted to the settings file:\n{ae}", "Access Error");
+				MessageBox.Show($"Access is not permitted to the settings file:\n{ae.Message}", "Access Error");
+				Application.Exit();
 			}
 			catch (IOException ioe)
 			{
-				MessageBox.Show($"There was an IO error parsing settings:\n{ioe}", "IO Error");
+				MessageBox.Show($"There was an IO error parsing settings:\n{ioe.Message}", "IO Error");
+				Application.Exit();
 			}
 			catch (Exception er)
 			{
 				MessageBox.Show($"There was an unidentified error parsing settings:\n{er}", "Unidentified Error");
+				Application.Exit();
 			}
 
 			FillSettingControls();

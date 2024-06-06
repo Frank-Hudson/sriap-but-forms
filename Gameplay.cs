@@ -33,6 +33,8 @@ namespace SriapButForms
 
 		static readonly int Pairs = PublicItems.formSettings.SettingsData.duplicates;
 
+		static readonly TimeSpan GameLength = TimeSpan.FromSeconds(60); // TimeSpan.FromSeconds(PublicItems.formSettings.SettingsData.time);
+
 
 		static readonly int CardCount = CardRows * CardColumns;
 		static readonly int PairCount = CardCount / Pairs;
@@ -56,7 +58,7 @@ namespace SriapButForms
 		int PlayerScore = 0;
 
 		readonly Timer GameTimer = new() { Interval = 1000, };
-		TimeSpan GameLength = TimeSpan.FromMinutes(1); // TODO: Difficulties; Easy 2m, Hard 1m
+		TimeSpan GameTime = GameLength; // TODO: Difficulties; Easy 60s, Hard 30s
 
 		readonly Timer CardTimer = new() { Interval = 1000, };
 
@@ -66,20 +68,22 @@ namespace SriapButForms
 		{
 			InitializeComponent();
 
-			GameTimer.Tick += delegate
+			GameTimer.Tick += new EventHandler(GameTimerTick);
+		}
+
+		void GameTimerTick(object sender, EventArgs e)
+		{
+			GameTime -= TimeSpan.FromMilliseconds(GameTimer.Interval);
+
+			string timerString = GameTime.ToString(@"mm\:ss");
+
+			labelTimeRemaining.Text = timerString;
+
+			if (GameTime.Ticks < TimeSpan.TicksPerSecond)
 			{
-				GameLength -= TimeSpan.FromMilliseconds(GameTimer.Interval);
-
-				string timerString = GameLength.ToString(@"mm\:ss");
-
-				labelTimeRemaining.Text = timerString;
-
-				if (GameLength.Ticks < TimeSpan.TicksPerSecond)
-				{
-					GameTimer.Stop();
-					BroadcastOutcome(PlayerScore, PlayerScore == CardCount * POINTS_FOR_PAIR_MATCH);
-				}
-			};
+				GameTimer.Stop();
+				BroadcastOutcome(PlayerScore, PlayerScore == CardCount * POINTS_FOR_PAIR_MATCH);
+			}
 		}
 
 		void IncreasePlayerScore(int value)
@@ -95,7 +99,7 @@ namespace SriapButForms
 
 		void BroadcastOutcome(int score, bool win)
 		{
-			GameOutcome formGameplayFinish = new(score, win);
+			GameOutcome formGameplayFinish = new(GameTime, score, win);
 			switch (formGameplayFinish.ShowDialog())
 			{
 				case DialogResult.Retry: Setup(); break;
@@ -128,7 +132,7 @@ namespace SriapButForms
 
 			UpdateRemainingCards();
 
-			GameLength = TimeSpan.FromMinutes(1);
+			GameTime = GameLength;
 			labelTimeRemaining.Text = "--:--";
 
 			int firstExcludedImageIndex = randomGenerator.Next(ImageCount) + 1;
@@ -191,6 +195,7 @@ namespace SriapButForms
 		{
 			if (!GameTimer.Enabled)
 			{
+				labelTimeRemaining.Text = $"01:00";
 				GameTimer.Start();
 			}
 			CardTimer.Start();

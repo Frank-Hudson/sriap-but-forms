@@ -13,17 +13,19 @@ namespace SriapButForms
 {
 	public partial class GameOutcome : Form
 	{
+		readonly TimeSpan Time;
 		readonly int Score;
 		readonly bool Win;
 		readonly string Status;
 
 		public string Username;
 
-		public GameOutcome(int score, bool win)
+		public GameOutcome(TimeSpan time, int score, bool win)
 		{
 			InitializeComponent();
 			DialogResult = DialogResult.None;
 
+			Time = time;
 			Score = score;
 			Win = win;
 			Status = Win ? "YOU WIN!" : "YOU LOSE!";
@@ -31,6 +33,7 @@ namespace SriapButForms
 			Text = $"GAME OVER - {Status}";
 			labelStatus.Text = Status;
 			labelScore.Text = $"Score {Score}";
+			labelTime.Text = Time.ToString(@"mm\:ss");
 		}
 
 		private void buttonSaveScore_Click(object sender, EventArgs e)
