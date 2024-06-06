@@ -10,76 +10,103 @@ using System.Windows.Forms;
 
 namespace SriapButForms
 {
-	public partial class FormForGameplay : Form
+	public partial class Gameplay : Form
 	{
-		// ---- Before the concept of this game ---- //
-
-		const int PAIRS = 2;
-
-		// ---- Formstuffs ---- //
-
-		static readonly Form FormOfLatestFocus = Form.ActiveForm;
-
 		// ---- CONSTANTS ---- //
-
-		const int IMAGE_COUNT = 10;
-		
-		const int CARD_ROWS = 4;
-		const int CARD_COLUMNS = 4;
-		const int CARD_COUNT = CARD_ROWS * CARD_COLUMNS;
-		const int PAIR_COUNT = CARD_COUNT / PAIRS;
 
 		const int CARD_WIDTH = 158;
 		const int CARD_HEIGHT = 202;
-		
+
 		const int CARD_DISTANCE_HORIZONTAL = 25;
 		const int CARD_DISTANCE_VERTICAL = 15;
 
-		const int POINTS_FOR_A_MATCH = 3;
-
 		const int CARD_TURNED_PAUSE = 500;
 
-		// ---- Images ---- //
+		const int POINTS_FOR_PAIR_MATCH = 3;
 
-		readonly Image[] CardImages = new Image[IMAGE_COUNT];
-		
-		// ---- Cards ---- //
+		// ---- Settings ---- //
+
+		static readonly int CardRows = PublicItems.formSettings.SettingsData.cardgrid.x;
+		static readonly int CardColumns = PublicItems.formSettings.SettingsData.cardgrid.y;
+
+		static readonly int ImageCount = PublicItems.formSettings.SettingsData.images.total;
+
+		static readonly int Pairs = PublicItems.formSettings.SettingsData.duplicates;
+
+
+		static readonly int CardCount = CardRows * CardColumns;
+		static readonly int PairCount = CardCount / Pairs;
+
+		// ---- VARIABLES ---- //
+
+		readonly Image[] CardImages = new Image[ImageCount];
 
 		readonly Color CARD_COLOUR = Color.FromArgb(0x00, 0xED, 0xF2);
-		readonly Card[] CardComponents = new Card[CARD_COUNT];
+
+		readonly Card[] CardComponents = new Card[CardCount];
+
 		Point CARD_0_LOCATION;
+
 		Card FirstTurned;
 
-		// ---- Gameplay ---- //
-
 		bool IsFirstGuess = true;
-		int PlayerScore = 0;
 		int Guesses = 0;
 		int CorrectGuesses = 0;
 
+		int PlayerScore = 0;
+
+		readonly Timer GameTimer = new() { Interval = 1, };
+		TimeSpan GameLength = TimeSpan.FromMinutes(1); // TODO: Difficulties; Easy 2m, Hard 1m
+
+		readonly Timer CardTimer = new() { Interval = 1000, };
+
 		// ---- #### ---- METHODS ---- #### ---- //
 
-		public FormForGameplay()
+		public Gameplay()
 		{
 			InitializeComponent();
+
+			GameTimer.Tick += delegate
+			{
+				GameLength -= TimeSpan.FromMilliseconds(GameTimer.Interval);
+
+				string timerString = GameLength.ToString(@"mm\:ss\:fff");
+
+				labelTimeRemaining.Text = timerString;
+
+				if (GameLength.Ticks <= TimeSpan.TicksPerMillisecond)
+				{
+					GameTimer.Stop();
+					BroadcastOutcome(PlayerScore, PlayerScore == CardCount * POINTS_FOR_PAIR_MATCH);
+				}
+			};
 		}
 
-		void UpdatePlayerScore(int value)
+		void IncreasePlayerScore(int value)
 		{
 			PlayerScore += value;
 			labelScore.Text = $"Score {PlayerScore}";
 		}
 
-		void BroadcastWin(int score, bool win)
+		void UpdateRemainingCards()
 		{
-			FormForGameplayFinish formGameplayFinish = new(score, win);
-			if (formGameplayFinish.ShowDialog() == DialogResult.Retry) SetupGameplay(new());
+			labelCardsRemaining.Text = $"Cards: {CardCount - CorrectGuesses * 2}";
+		}
+
+		void BroadcastOutcome(int score, bool win)
+		{
+			GameOutcome formGameplayFinish = new(score, win);
+			switch (formGameplayFinish.ShowDialog())
+			{
+				case DialogResult.Retry: Setup(); break;
+				case DialogResult.Abort: buttonBack.PerformClick(); break;
+			}
 		}
 
 		Point GetCardLocation(int index)
 		{
-			int row = (index / CARD_COLUMNS) + 1;
-			int column = (index % CARD_COLUMNS) + 1;
+			int row = (index / CardColumns) + 1;
+			int column = (index % CardColumns) + 1;
 
 			//appLog.LogFill($"Card {index + 1} gridpos: {row}, {column}");
 
@@ -89,24 +116,34 @@ namespace SriapButForms
 			);
 		}
 
-		void SetupGameplay(Random randomGenerator)
+		// ---- SETUP ---- //
+
+		void Setup()
 		{
+			Random randomGenerator = new();
+
 			PlayerScore = 0;
 			labelScore.Text = $"Score {PlayerScore}";
+
 			Guesses = 0;
 			CorrectGuesses = 0;
 
-			int firstExcludedImageIndex = randomGenerator.Next(IMAGE_COUNT) + 1;
-			int[] remainingImages = Enumerable.Range(1, IMAGE_COUNT)
+			UpdateRemainingCards();
+
+			GameLength = TimeSpan.FromMinutes(1);
+			labelTimeRemaining.Text = "--:--:---";
+
+			int firstExcludedImageIndex = randomGenerator.Next(ImageCount) + 1;
+			int[] remainingImages = Enumerable.Range(1, ImageCount)
 				.Where(numberItem => numberItem != firstExcludedImageIndex).ToArray();
-			int secondExcludedImageIndex = remainingImages[randomGenerator.Next(IMAGE_COUNT - 1)];
+			int secondExcludedImageIndex = remainingImages[randomGenerator.Next(ImageCount - 1)];
 			int[] usableImageIndices = remainingImages
 				.Where((numberItem, index) => numberItem != secondExcludedImageIndex).ToArray();
 
 			List<int> usableImages = usableImageIndices.Concat(usableImageIndices).ToList();
-			List<int> usedImages = new(CARD_COUNT);
+			List<int> usedImages = new(CardCount);
 
-			for (int i = 0; i < CARD_COUNT; i++)
+			for (int i = 0; i < CardCount; i++)
 			{
 				int currentImageIndex = randomGenerator.Next(0, usableImages.Count);
 				usedImages.Add(usableImages[currentImageIndex] + 1);
@@ -128,17 +165,15 @@ namespace SriapButForms
 					Name = $"Card {i + 1}",
 					Parent = this,
 				};
-				CardComponents[i].Click += new EventHandler(card_Click);
+				CardComponents[i].Click += new EventHandler(CardClick);
 				CardComponents[i].Show();
 
 				usableImages.RemoveAt(currentImageIndex);
 			}
 		}
 
-		private void FormForGameplay_Load(object sender, EventArgs e)
+		private void FormGameplayLoad(object sender, EventArgs e)
 		{
-			Random randomGenerator = new();
-
 			appLog.output = new();
 
 			appLog.LogFill($"Window: {Size.Width} x {Size.Height}");
@@ -150,15 +185,17 @@ namespace SriapButForms
 
 			appLog.LogFill($"Card scale: {CARD_WIDTH} x {CARD_HEIGHT}");
 
-			for (int i = 0; i < IMAGE_COUNT; i++)
+			for (int i = 0; i < ImageCount; i++)
 			{
 				CardImages[i] = Image.FromFile($"Assets/Card{i + 1}.png");
 			}
 
-			SetupGameplay(randomGenerator);
+			Setup();
 		}
 
-		private void card_Click(object sender, EventArgs e)
+		// ---- GAME ---- //
+
+		private void CardClick(object sender, EventArgs e)
 		{
 			Card clickedCard = sender as Card;
 
@@ -171,16 +208,29 @@ namespace SriapButForms
 
 			clickedCard.Image = clickedCard.CardImage;
 
-			Timer timer = new() { Interval = 1000, };
-			timer.Start();
+			if (!GameTimer.Enabled)
+			{
+				GameTimer.Start();
+			}
+
+			CardTimer.Start();
 
 			Guesses++;
 
-			if (!IsFirstGuess)
+			if (IsFirstGuess)
 			{
-				// #### 2nd guess ####
+				// # 1st guess #
 
-				PublicItems.Wait(CARD_TURNED_PAUSE);
+				appLog.LogFill("1st guess!", LogLevel.Info);
+
+				FirstTurned = clickedCard;
+				IsFirstGuess = false;
+			}
+			else
+			{
+				// # 2nd guess #
+
+				CardTimer.Stop();
 
 				if (tags == (string)FirstTurned.Tag)
 				{
@@ -189,17 +239,18 @@ namespace SriapButForms
 					appLog.LogFill("Cards MATCH!", LogLevel.Info);
 
 					CorrectGuesses++;
+					UpdateRemainingCards();
+					IncreasePlayerScore(POINTS_FOR_PAIR_MATCH);
+
+					PublicItems.Wait(CARD_TURNED_PAUSE);
 
 					clickedCard.Hide();
-					clickedCard.IsTurned = false;
 					FirstTurned.Hide();
-					FirstTurned.IsTurned = false;
 
-					UpdatePlayerScore(POINTS_FOR_A_MATCH);
-
-					if (CorrectGuesses >= PAIR_COUNT)
+					if (CorrectGuesses == PairCount)
 					{
-						BroadcastWin(PlayerScore, true);
+						GameTimer.Stop();
+						BroadcastOutcome(PlayerScore, true);
 					}
 				}
 				else
@@ -207,6 +258,8 @@ namespace SriapButForms
 					// ## Cards don't match ##
 
 					appLog.LogFill("Cards DON'T MATCH!", LogLevel.Info);
+
+					PublicItems.Wait(CARD_TURNED_PAUSE);
 
 					clickedCard.Image = null;
 					FirstTurned.Image = null;
@@ -216,16 +269,9 @@ namespace SriapButForms
 				FirstTurned.IsTurned = false;
 				IsFirstGuess = true;
 			}
-			else
-			{
-				// #### 1st guess ####
-
-				appLog.LogFill("1st guess!", LogLevel.Info);
-
-				FirstTurned = clickedCard;
-				IsFirstGuess = false;
-			}
 		}
+
+		// ---- UI Navigation ---- //
 
 		private void buttonBack_Click(object sender, EventArgs e)
 		{
@@ -234,7 +280,7 @@ namespace SriapButForms
 
 		private void buttonQuit_Click(object sender, EventArgs e)
 		{
-			PublicItems.Quit(sender, e);
+			Application.Exit();
 		}
 	}
 }

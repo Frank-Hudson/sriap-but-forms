@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace SriapButForms
 {
-	public partial class FormForUsername : Form
+	public partial class Username : Form
 	{
-		public FormForUsername()
+		public Username()
 		{
 			InitializeComponent();
 			inputUsername.Height = 26;
@@ -21,13 +21,17 @@ namespace SriapButForms
 
 		public string GetUsername() { return inputUsername.Text; }
 
+		bool IsStringNullEmptyOrWhitespace(string value)
+		{
+			return string.IsNullOrEmpty(value) || string.IsNullOrWhiteSpace(value);
+		}
+
 		private void buttonSave_Click(object sender, EventArgs e)
 		{
-			if (
-				(string.IsNullOrEmpty(inputUsername.Text) || string.IsNullOrWhiteSpace(inputUsername.Text)) &&
+			if (!(
+				IsStringNullEmptyOrWhitespace(inputUsername.Text) &&
 				MessageBox.Show("Are you sure you don't want to save a username with your score?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.No
-			) return;
-			Close();
+			)) Close();
 		}
 	}
 }

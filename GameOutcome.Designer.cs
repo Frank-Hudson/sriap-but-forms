@@ -1,7 +1,7 @@
 ﻿
 namespace SriapButForms
 {
-	partial class FormForGameplayFinish
+	partial class GameOutcome
 	{
 		/// <summary>
 		/// Required designer variable.
@@ -29,30 +29,31 @@ namespace SriapButForms
 		/// </summary>
 		private void InitializeComponent()
 		{
-			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormForGameplayFinish));
-			this.buttonClose = new System.Windows.Forms.Button();
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GameOutcome));
+			this.buttonQuit = new System.Windows.Forms.Button();
 			this.labelStatus = new System.Windows.Forms.Label();
 			this.labelScore = new System.Windows.Forms.Label();
 			this.buttonSaveScore = new System.Windows.Forms.Button();
 			this.buttonReplay = new System.Windows.Forms.Button();
+			this.buttonBack = new System.Windows.Forms.Button();
 			this.SuspendLayout();
 			// 
-			// buttonClose
+			// buttonQuit
 			// 
-			this.buttonClose.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-			this.buttonClose.BackColor = System.Drawing.Color.Teal;
-			this.buttonClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-			this.buttonClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.buttonClose.Font = new System.Drawing.Font("JetBrains Mono", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-			this.buttonClose.ForeColor = System.Drawing.Color.White;
-			this.buttonClose.Location = new System.Drawing.Point(91, 271);
-			this.buttonClose.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-			this.buttonClose.Name = "buttonClose";
-			this.buttonClose.Size = new System.Drawing.Size(88, 27);
-			this.buttonClose.TabIndex = 25;
-			this.buttonClose.Text = "Close";
-			this.buttonClose.UseVisualStyleBackColor = false;
-			this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
+			this.buttonQuit.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+			this.buttonQuit.BackColor = System.Drawing.Color.Teal;
+			this.buttonQuit.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+			this.buttonQuit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.buttonQuit.Font = new System.Drawing.Font("JetBrains Mono", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+			this.buttonQuit.ForeColor = System.Drawing.Color.White;
+			this.buttonQuit.Location = new System.Drawing.Point(145, 271);
+			this.buttonQuit.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+			this.buttonQuit.Name = "buttonQuit";
+			this.buttonQuit.Size = new System.Drawing.Size(89, 27);
+			this.buttonQuit.TabIndex = 25;
+			this.buttonQuit.Text = "Quit";
+			this.buttonQuit.UseVisualStyleBackColor = false;
+			this.buttonQuit.Click += new System.EventHandler(this.buttonClose_Click);
 			// 
 			// labelStatus
 			// 
@@ -116,23 +117,41 @@ namespace SriapButForms
 			this.buttonReplay.UseVisualStyleBackColor = false;
 			this.buttonReplay.Click += new System.EventHandler(this.buttonReplay_Click);
 			// 
-			// FormForGameplayFinish
+			// buttonBack
+			// 
+			this.buttonBack.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+			this.buttonBack.BackColor = System.Drawing.Color.Teal;
+			this.buttonBack.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+			this.buttonBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.buttonBack.Font = new System.Drawing.Font("JetBrains Mono", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+			this.buttonBack.ForeColor = System.Drawing.Color.White;
+			this.buttonBack.Location = new System.Drawing.Point(35, 271);
+			this.buttonBack.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+			this.buttonBack.Name = "buttonBack";
+			this.buttonBack.Size = new System.Drawing.Size(89, 27);
+			this.buttonBack.TabIndex = 30;
+			this.buttonBack.Text = "<<< Back";
+			this.buttonBack.UseVisualStyleBackColor = false;
+			this.buttonBack.Click += new System.EventHandler(this.buttonBack_Click);
+			// 
+			// GameOutcome
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-			this.CancelButton = this.buttonClose;
+			this.CancelButton = this.buttonQuit;
 			this.ClientSize = new System.Drawing.Size(268, 321);
+			this.Controls.Add(this.buttonBack);
 			this.Controls.Add(this.buttonReplay);
 			this.Controls.Add(this.buttonSaveScore);
 			this.Controls.Add(this.labelScore);
 			this.Controls.Add(this.labelStatus);
-			this.Controls.Add(this.buttonClose);
+			this.Controls.Add(this.buttonQuit);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
-			this.Name = "FormForGameplayFinish";
+			this.Name = "GameOutcome";
 			this.ShowIcon = false;
 			this.ShowInTaskbar = false;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -143,10 +162,11 @@ namespace SriapButForms
 
 		#endregion
 
-		private System.Windows.Forms.Button buttonClose;
+		private System.Windows.Forms.Button buttonQuit;
 		private System.Windows.Forms.Label labelStatus;
 		private System.Windows.Forms.Label labelScore;
 		private System.Windows.Forms.Button buttonSaveScore;
 		private System.Windows.Forms.Button buttonReplay;
+		private System.Windows.Forms.Button buttonBack;
 	}
 }

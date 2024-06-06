@@ -1,7 +1,7 @@
 ﻿
 namespace SriapButForms
 {
-	partial class FormForStartMenu
+	partial class StartMenu
 	{
 		/// <summary>
 		/// Required designer variable.
@@ -29,7 +29,7 @@ namespace SriapButForms
 		/// </summary>
 		private void InitializeComponent()
 		{
-			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormForStartMenu));
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StartMenu));
 			this.buttonQuit = new System.Windows.Forms.Button();
 			this.pictureTitle = new System.Windows.Forms.PictureBox();
 			this.buttonAbout = new System.Windows.Forms.Button();
@@ -172,7 +172,6 @@ namespace SriapButForms
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Sriap";
 			this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormForStartMenu_FormClosed);
 			((System.ComponentModel.ISupportInitialize)(this.pictureTitle)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureCycLogo)).EndInit();
 			this.ResumeLayout(false);

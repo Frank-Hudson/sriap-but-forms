@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace SriapButForms
 {
-	public partial class FormForStartMenu : Form
+	public partial class StartMenu : Form
 	{
-		public FormForStartMenu()
+		public StartMenu()
 		{
 			InitializeComponent();
 		}
@@ -30,7 +30,7 @@ namespace SriapButForms
 
 		private void buttonHighScores_Click(object sender, EventArgs e)
 		{
-			GoToForm(PublicItems.formHighScores);
+			GoToForm(PublicItems.formScores);
 		}
 
 		private void buttonSettings_Click(object sender, EventArgs e)
@@ -45,12 +45,7 @@ namespace SriapButForms
 
 		private void buttonQuit_Click(object sender, EventArgs e)
 		{
-			PublicItems.Quit(sender, e);
-		}
-
-		private void FormForStartMenu_FormClosed(object sender, FormClosedEventArgs e)
-		{
-			PublicItems.Quit(sender, e);
+			Application.Exit();
 		}
 	}
 }

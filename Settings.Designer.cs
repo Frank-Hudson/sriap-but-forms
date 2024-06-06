@@ -1,7 +1,7 @@
 ﻿
 namespace SriapButForms
 {
-	partial class FormForSettings
+	partial class Settings
 	{
 		/// <summary>
 		/// Required designer variable.
@@ -29,7 +29,7 @@ namespace SriapButForms
 		/// </summary>
 		private void InitializeComponent()
 		{
-			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormForSettings));
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Settings));
 			this.buttonBack = new System.Windows.Forms.Button();
 			this.pictureTitle = new System.Windows.Forms.PictureBox();
 			this.labelTitle = new System.Windows.Forms.Label();
@@ -108,6 +108,7 @@ namespace SriapButForms
             0,
             0,
             0});
+			this.numericMaximumImages.ValueChanged += new System.EventHandler(this.numericMaximumImages_ValueChanged);
 			// 
 			// labelOutOfImages
 			// 
@@ -137,6 +138,7 @@ namespace SriapButForms
             0,
             0,
             0});
+			this.numericCardGridY.ValueChanged += new System.EventHandler(this.numericCardGridY_ValueChanged);
 			// 
 			// labelByCardGrid
 			// 
@@ -166,6 +168,7 @@ namespace SriapButForms
             0,
             0,
             0});
+			this.numericCardGridX.ValueChanged += new System.EventHandler(this.numericCardGridX_ValueChanged);
 			// 
 			// labelImages
 			// 
@@ -249,6 +252,7 @@ namespace SriapButForms
 			this.buttonSave.TabIndex = 19;
 			this.buttonSave.Text = "Save";
 			this.buttonSave.UseVisualStyleBackColor = false;
+			this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
 			// 
 			// FormForSettings
 			// 
@@ -276,6 +280,7 @@ namespace SriapButForms
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Sriap - Settings";
 			this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+			this.Load += new System.EventHandler(this.FormForSettings_Load);
 			((System.ComponentModel.ISupportInitialize)(this.pictureTitle)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.numericMaximumImages)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.numericCardGridY)).EndInit();

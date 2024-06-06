@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace SriapButForms
 {
-	public partial class FormForGameplayFinish : Form
+	public partial class GameOutcome : Form
 	{
 		readonly int Score;
 		readonly bool Win;
@@ -19,7 +19,7 @@ namespace SriapButForms
 
 		public string Username;
 
-		public FormForGameplayFinish(int score, bool win)
+		public GameOutcome(int score, bool win)
 		{
 			InitializeComponent();
 			DialogResult = DialogResult.None;
@@ -35,7 +35,7 @@ namespace SriapButForms
 
 		private void buttonSaveScore_Click(object sender, EventArgs e)
 		{
-			FormForUsername formUsername = new();
+			Username formUsername = new();
 			formUsername.ShowDialog();
 			Username = formUsername.GetUsername();
 			StreamWriter streamWriter = File.AppendText("Data/scores.txt");
@@ -43,15 +43,25 @@ namespace SriapButForms
 			streamWriter.Close();
 		}
 
+		void Close(DialogResult dialogResult)
+		{
+			DialogResult = dialogResult;
+			Close();
+		}
+
 		private void buttonReplay_Click(object sender, EventArgs e)
 		{
-			DialogResult = DialogResult.Retry;
-			Close();
+			Close(DialogResult.Retry);
+		}
+
+		private void buttonBack_Click(object sender, EventArgs e)
+		{
+			Close(DialogResult.Abort);
 		}
 
 		private void buttonClose_Click(object sender, EventArgs e)
 		{
-			Close();
+			Application.Exit();
 		}
 	}
 }

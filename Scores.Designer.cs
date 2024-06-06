@@ -1,7 +1,7 @@
 ﻿
 namespace SriapButForms
 {
-	partial class FormForHighScores
+	partial class Scores
 	{
 		/// <summary>
 		/// Required designer variable.
@@ -34,7 +34,7 @@ namespace SriapButForms
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormForHighScores));
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Scores));
 			this.pictureTitle = new System.Windows.Forms.PictureBox();
 			this.labelTitle = new System.Windows.Forms.Label();
 			this.groupHighScoreMode = new System.Windows.Forms.GroupBox();

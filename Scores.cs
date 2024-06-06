@@ -11,8 +11,10 @@ using System.Windows.Forms;
 
 namespace SriapButForms
 {
-	public partial class FormForHighScores : Form
+	public partial class Scores : Form
 	{
+		const string SCORES_FILE_PATH = "Data/scores.txt";
+
 		class Score
 		{
 			public int score { get; }
@@ -66,7 +68,7 @@ namespace SriapButForms
 
 		List<Score> scores = new();
 
-		public FormForHighScores()
+		public Scores()
 		{
 			InitializeComponent();
 		}
@@ -78,7 +80,7 @@ namespace SriapButForms
 
 		private void FormForHighScores_Load(object sender, EventArgs e)
 		{
-			string[] scoresLines = File.ReadAllLines("Data/scores.txt");
+			string[] scoresLines = File.ReadAllLines(SCORES_FILE_PATH);
 
 			for (int i = 0; i < scoresLines.Length; i++)
 			{

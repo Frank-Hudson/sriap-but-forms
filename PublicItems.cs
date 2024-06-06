@@ -9,11 +9,11 @@ namespace SriapButForms
 {
 	class PublicItems
 	{
-		public static FormForStartMenu formStart = new();
-		public static FormForGameplay formGameplay = new();
-		public static FormForHighScores formHighScores = new();
-		public static FormForSettings formSettings = new();
+		public static StartMenu formStart = new();
 		public static About formAbout = new();
+		public static Settings formSettings = new();
+		public static Scores formScores = new();
+		public static Gameplay formGameplay = new();
 
 
 		/// <summary>
@@ -43,17 +43,6 @@ namespace SriapButForms
 			}
 		}
 
-
-		public static void Quit(object sender, EventArgs e)
-		{
-			switch (MessageBox.Show("Are you sure you want to quit?", "Confirm", MessageBoxButtons.YesNo))
-			{
-				case DialogResult.Yes:
-					Application.Exit();
-					break;
-			}
-		}
-		
 
 		public static void BackToStart(Form form, object sender, EventArgs e)
 		{

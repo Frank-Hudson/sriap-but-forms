@@ -1,7 +1,7 @@
 ﻿
 namespace SriapButForms
 {
-	partial class FormForGameplay
+	partial class Gameplay
 	{
 		/// <summary>
 		///  Required designer variable.
@@ -30,12 +30,15 @@ namespace SriapButForms
 		private void InitializeComponent()
 		{
 			this.components = new System.ComponentModel.Container();
-			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormForGameplay));
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Gameplay));
 			this.pictureTitle = new System.Windows.Forms.PictureBox();
 			this.buttonQuit = new System.Windows.Forms.Button();
 			this.appLog = new SriapButForms.AppLog(this.components);
 			this.buttonBack = new System.Windows.Forms.Button();
 			this.labelScore = new System.Windows.Forms.Label();
+			this.labelRemaining = new System.Windows.Forms.Label();
+			this.labelTimeRemaining = new System.Windows.Forms.Label();
+			this.labelCardsRemaining = new System.Windows.Forms.Label();
 			((System.ComponentModel.ISupportInitialize)(this.pictureTitle)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -89,34 +92,76 @@ namespace SriapButForms
 			// 
 			// labelScore
 			// 
-			this.labelScore.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+			this.labelScore.Anchor = System.Windows.Forms.AnchorStyles.Left;
 			this.labelScore.BackColor = System.Drawing.Color.Transparent;
-			this.labelScore.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+			this.labelScore.Font = new System.Drawing.Font("JetBrains Mono", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
 			this.labelScore.ForeColor = System.Drawing.Color.White;
-			this.labelScore.Location = new System.Drawing.Point(396, 460);
+			this.labelScore.Location = new System.Drawing.Point(224, 393);
 			this.labelScore.Name = "labelScore";
 			this.labelScore.Size = new System.Drawing.Size(166, 38);
 			this.labelScore.TabIndex = 5;
 			this.labelScore.Text = "Score 0";
 			this.labelScore.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
-			// FormForGameplay
+			// labelRemaining
+			// 
+			this.labelRemaining.Anchor = System.Windows.Forms.AnchorStyles.Left;
+			this.labelRemaining.BackColor = System.Drawing.Color.Transparent;
+			this.labelRemaining.Font = new System.Drawing.Font("JetBrains Mono", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+			this.labelRemaining.ForeColor = System.Drawing.Color.White;
+			this.labelRemaining.Location = new System.Drawing.Point(224, 175);
+			this.labelRemaining.Name = "labelRemaining";
+			this.labelRemaining.Size = new System.Drawing.Size(166, 38);
+			this.labelRemaining.TabIndex = 6;
+			this.labelRemaining.Text = "Remaining";
+			this.labelRemaining.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			// 
+			// labelTimeRemaining
+			// 
+			this.labelTimeRemaining.Anchor = System.Windows.Forms.AnchorStyles.Left;
+			this.labelTimeRemaining.BackColor = System.Drawing.Color.Transparent;
+			this.labelTimeRemaining.Font = new System.Drawing.Font("JetBrains Mono", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+			this.labelTimeRemaining.ForeColor = System.Drawing.Color.White;
+			this.labelTimeRemaining.Location = new System.Drawing.Point(250, 233);
+			this.labelTimeRemaining.Name = "labelTimeRemaining";
+			this.labelTimeRemaining.Size = new System.Drawing.Size(116, 29);
+			this.labelTimeRemaining.TabIndex = 7;
+			this.labelTimeRemaining.Text = "--:--:---";
+			this.labelTimeRemaining.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			// 
+			// labelCardsRemaining
+			// 
+			this.labelCardsRemaining.Anchor = System.Windows.Forms.AnchorStyles.Left;
+			this.labelCardsRemaining.BackColor = System.Drawing.Color.Transparent;
+			this.labelCardsRemaining.Font = new System.Drawing.Font("JetBrains Mono", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+			this.labelCardsRemaining.ForeColor = System.Drawing.Color.White;
+			this.labelCardsRemaining.Location = new System.Drawing.Point(250, 286);
+			this.labelCardsRemaining.Name = "labelCardsRemaining";
+			this.labelCardsRemaining.Size = new System.Drawing.Size(116, 29);
+			this.labelCardsRemaining.TabIndex = 8;
+			this.labelCardsRemaining.Text = "Cards: 16";
+			this.labelCardsRemaining.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			// 
+			// Gameplay
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
 			this.ClientSize = new System.Drawing.Size(960, 540);
+			this.Controls.Add(this.labelCardsRemaining);
+			this.Controls.Add(this.labelTimeRemaining);
+			this.Controls.Add(this.labelRemaining);
 			this.Controls.Add(this.labelScore);
 			this.Controls.Add(this.buttonBack);
 			this.Controls.Add(this.buttonQuit);
 			this.Controls.Add(this.pictureTitle);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-			this.Name = "FormForGameplay";
+			this.Name = "Gameplay";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Sriap";
 			this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-			this.Load += new System.EventHandler(this.FormForGameplay_Load);
+			this.Load += new System.EventHandler(this.FormGameplayLoad);
 			((System.ComponentModel.ISupportInitialize)(this.pictureTitle)).EndInit();
 			this.ResumeLayout(false);
 
@@ -129,6 +174,9 @@ namespace SriapButForms
 		private AppLog appLog;
 		private System.Windows.Forms.Button buttonBack;
 		private System.Windows.Forms.Label labelScore;
+		private System.Windows.Forms.Label labelRemaining;
+		private System.Windows.Forms.Label labelTimeRemaining;
+		private System.Windows.Forms.Label labelCardsRemaining;
 	}
 }
 
