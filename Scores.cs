@@ -39,31 +39,19 @@ namespace SriapButForms
 				this.score = int.Parse(scoreUserPair[0]);
 			}
 
-			public override string ToString()
-			{
-				return $"{this.score} {this.user}";
-			}
+			public override string ToString() => $"{this.score} {this.user}";
 
-			public int CompareTo(Score other)
-			{
-				return this.score.CompareTo(other.score);
-			}
+			public int CompareTo(Score other) => this.score.CompareTo(other.score);
 
-			public Label GetScoreLabel()
+			public Label GetScoreLabel() => new()
 			{
-				return new()
-				{
-					Text = this.score.ToString()
-				};
-			}
+				Text = this.score.ToString()
+			};
 
-			public Label GetUserLabel()
+			public Label GetUserLabel() => new()
 			{
-				return new()
-				{
-					Text = this.user
-				};
-			}
+				Text = this.user
+			};
 		}
 
 		List<Score> scores = new();

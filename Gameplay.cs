@@ -55,7 +55,7 @@ namespace SriapButForms
 
 		int PlayerScore = 0;
 
-		readonly Timer GameTimer = new() { Interval = 1, };
+		readonly Timer GameTimer = new() { Interval = 1000, };
 		TimeSpan GameLength = TimeSpan.FromMinutes(1); // TODO: Difficulties; Easy 2m, Hard 1m
 
 		readonly Timer CardTimer = new() { Interval = 1000, };
@@ -70,11 +70,11 @@ namespace SriapButForms
 			{
 				GameLength -= TimeSpan.FromMilliseconds(GameTimer.Interval);
 
-				string timerString = GameLength.ToString(@"mm\:ss\:fff");
+				string timerString = GameLength.ToString(@"mm\:ss");
 
 				labelTimeRemaining.Text = timerString;
 
-				if (GameLength.Ticks <= TimeSpan.TicksPerMillisecond)
+				if (GameLength.Ticks < TimeSpan.TicksPerSecond)
 				{
 					GameTimer.Stop();
 					BroadcastOutcome(PlayerScore, PlayerScore == CardCount * POINTS_FOR_PAIR_MATCH);
@@ -108,8 +108,6 @@ namespace SriapButForms
 			int row = (index / CardColumns) + 1;
 			int column = (index % CardColumns) + 1;
 
-			//appLog.LogFill($"Card {index + 1} gridpos: {row}, {column}");
-
 			return new Point(
 				CARD_0_LOCATION.X + ((CARD_WIDTH + CARD_DISTANCE_HORIZONTAL) * row) - CARD_WIDTH,
 				CARD_0_LOCATION.Y + ((CARD_HEIGHT + CARD_DISTANCE_VERTICAL) * column) - CARD_HEIGHT
@@ -131,7 +129,7 @@ namespace SriapButForms
 			UpdateRemainingCards();
 
 			GameLength = TimeSpan.FromMinutes(1);
-			labelTimeRemaining.Text = "--:--:---";
+			labelTimeRemaining.Text = "--:--";
 
 			int firstExcludedImageIndex = randomGenerator.Next(ImageCount) + 1;
 			int[] remainingImages = Enumerable.Range(1, ImageCount)
@@ -174,16 +172,10 @@ namespace SriapButForms
 
 		private void FormGameplayLoad(object sender, EventArgs e)
 		{
-			appLog.output = new();
-
-			appLog.LogFill($"Window: {Size.Width} x {Size.Height}");
-
 			CARD_0_LOCATION = new(
 				(Size.Width / 2) - ((CARD_WIDTH + CARD_DISTANCE_HORIZONTAL) * 2),
 				pictureTitle.Height
 			);
-
-			appLog.LogFill($"Card scale: {CARD_WIDTH} x {CARD_HEIGHT}");
 
 			for (int i = 0; i < ImageCount; i++)
 			{
@@ -197,31 +189,25 @@ namespace SriapButForms
 
 		private void CardClick(object sender, EventArgs e)
 		{
+			if (!GameTimer.Enabled)
+			{
+				GameTimer.Start();
+			}
+			CardTimer.Start();
+
 			Card clickedCard = sender as Card;
-
 			string tags = (string)clickedCard.Tag;
-
-			appLog.LogFill($"Tag: {tags}, Turned?: {clickedCard.IsTurned}");
 
 			if (clickedCard.IsTurned) return;
 			else clickedCard.IsTurned = true;
 
 			clickedCard.Image = clickedCard.CardImage;
 
-			if (!GameTimer.Enabled)
-			{
-				GameTimer.Start();
-			}
-
-			CardTimer.Start();
-
 			Guesses++;
 
 			if (IsFirstGuess)
 			{
 				// # 1st guess #
-
-				appLog.LogFill("1st guess!", LogLevel.Info);
 
 				FirstTurned = clickedCard;
 				IsFirstGuess = false;
@@ -235,8 +221,6 @@ namespace SriapButForms
 				if (tags == (string)FirstTurned.Tag)
 				{
 					// ## Cards match ##
-
-					appLog.LogFill("Cards MATCH!", LogLevel.Info);
 
 					CorrectGuesses++;
 					UpdateRemainingCards();
@@ -256,8 +240,6 @@ namespace SriapButForms
 				else
 				{
 					// ## Cards don't match ##
-
-					appLog.LogFill("Cards DON'T MATCH!", LogLevel.Info);
 
 					PublicItems.Wait(CARD_TURNED_PAUSE);
 

@@ -19,13 +19,10 @@ namespace SriapButForms
 			Location += new Size(0, 20);
 		}
 
-		public string GetUsername() { return inputUsername.Text; }
+		public string GetUsername() => inputUsername.Text;
 
-		bool IsStringNullEmptyOrWhitespace(string value)
-		{
-			return string.IsNullOrEmpty(value) || string.IsNullOrWhiteSpace(value);
-		}
-
+		bool IsStringNullEmptyOrWhitespace(string value) => string.IsNullOrEmpty(value) || string.IsNullOrWhiteSpace(value);
+		
 		private void buttonSave_Click(object sender, EventArgs e)
 		{
 			if (!(

@@ -29,11 +29,9 @@ namespace SriapButForms
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Gameplay));
 			this.pictureTitle = new System.Windows.Forms.PictureBox();
 			this.buttonQuit = new System.Windows.Forms.Button();
-			this.appLog = new SriapButForms.AppLog(this.components);
 			this.buttonBack = new System.Windows.Forms.Button();
 			this.labelScore = new System.Windows.Forms.Label();
 			this.labelRemaining = new System.Windows.Forms.Label();
@@ -94,9 +92,10 @@ namespace SriapButForms
 			// 
 			this.labelScore.Anchor = System.Windows.Forms.AnchorStyles.Left;
 			this.labelScore.BackColor = System.Drawing.Color.Transparent;
+			this.labelScore.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.labelScore.Font = new System.Drawing.Font("JetBrains Mono", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
 			this.labelScore.ForeColor = System.Drawing.Color.White;
-			this.labelScore.Location = new System.Drawing.Point(224, 393);
+			this.labelScore.Location = new System.Drawing.Point(12, 389);
 			this.labelScore.Name = "labelScore";
 			this.labelScore.Size = new System.Drawing.Size(166, 38);
 			this.labelScore.TabIndex = 5;
@@ -107,9 +106,10 @@ namespace SriapButForms
 			// 
 			this.labelRemaining.Anchor = System.Windows.Forms.AnchorStyles.Left;
 			this.labelRemaining.BackColor = System.Drawing.Color.Transparent;
+			this.labelRemaining.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.labelRemaining.Font = new System.Drawing.Font("JetBrains Mono", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
 			this.labelRemaining.ForeColor = System.Drawing.Color.White;
-			this.labelRemaining.Location = new System.Drawing.Point(224, 175);
+			this.labelRemaining.Location = new System.Drawing.Point(12, 171);
 			this.labelRemaining.Name = "labelRemaining";
 			this.labelRemaining.Size = new System.Drawing.Size(166, 38);
 			this.labelRemaining.TabIndex = 6;
@@ -120,22 +120,24 @@ namespace SriapButForms
 			// 
 			this.labelTimeRemaining.Anchor = System.Windows.Forms.AnchorStyles.Left;
 			this.labelTimeRemaining.BackColor = System.Drawing.Color.Transparent;
+			this.labelTimeRemaining.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.labelTimeRemaining.Font = new System.Drawing.Font("JetBrains Mono", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
 			this.labelTimeRemaining.ForeColor = System.Drawing.Color.White;
-			this.labelTimeRemaining.Location = new System.Drawing.Point(250, 233);
+			this.labelTimeRemaining.Location = new System.Drawing.Point(38, 229);
 			this.labelTimeRemaining.Name = "labelTimeRemaining";
 			this.labelTimeRemaining.Size = new System.Drawing.Size(116, 29);
 			this.labelTimeRemaining.TabIndex = 7;
-			this.labelTimeRemaining.Text = "--:--:---";
+			this.labelTimeRemaining.Text = "--:--";
 			this.labelTimeRemaining.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
 			// labelCardsRemaining
 			// 
 			this.labelCardsRemaining.Anchor = System.Windows.Forms.AnchorStyles.Left;
 			this.labelCardsRemaining.BackColor = System.Drawing.Color.Transparent;
+			this.labelCardsRemaining.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.labelCardsRemaining.Font = new System.Drawing.Font("JetBrains Mono", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
 			this.labelCardsRemaining.ForeColor = System.Drawing.Color.White;
-			this.labelCardsRemaining.Location = new System.Drawing.Point(250, 286);
+			this.labelCardsRemaining.Location = new System.Drawing.Point(38, 282);
 			this.labelCardsRemaining.Name = "labelCardsRemaining";
 			this.labelCardsRemaining.Size = new System.Drawing.Size(116, 29);
 			this.labelCardsRemaining.TabIndex = 8;
@@ -171,7 +173,6 @@ namespace SriapButForms
 
 		private System.Windows.Forms.PictureBox pictureTitle;
 		private System.Windows.Forms.Button buttonQuit;
-		private AppLog appLog;
 		private System.Windows.Forms.Button buttonBack;
 		private System.Windows.Forms.Label labelScore;
 		private System.Windows.Forms.Label labelRemaining;
