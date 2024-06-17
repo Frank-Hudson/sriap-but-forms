@@ -21,12 +21,12 @@ namespace SriapButForms
 
 		public string GetUsername() => inputUsername.Text;
 
-		bool IsStringNullEmptyOrWhitespace(string value) => string.IsNullOrEmpty(value) || string.IsNullOrWhiteSpace(value);
+		bool IsBlank(string value) => string.IsNullOrEmpty(value) || string.IsNullOrWhiteSpace(value);
 		
 		private void buttonSave_Click(object sender, EventArgs e)
 		{
 			if (!(
-				IsStringNullEmptyOrWhitespace(inputUsername.Text) &&
+				IsBlank(inputUsername.Text) &&
 				MessageBox.Show("Are you sure you don't want to save a username with your score?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.No
 			)) Close();
 		}

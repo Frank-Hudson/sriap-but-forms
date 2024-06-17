@@ -20,20 +20,29 @@ namespace SriapButForms
 
 		public class SriapSettings
 		{
-			public CoordsXY cardgrid;
+			public GridSize2D cardgrid;
 			public AllowedTotal images;
 			public int duplicates;
+			public DifficultyMode difficulty;
 
-			public struct CoordsXY
+			public struct GridSize2D
 			{
 				public int x;
 				public int y;
+
+				public int Area() => this.x * this.y;
 			}
 
 			public struct AllowedTotal
 			{
 				public int allowed;
 				public int total;
+			}
+
+			public enum DifficultyMode
+			{
+				Normal,
+				Easy,
 			}
 		}
 
@@ -93,41 +102,53 @@ namespace SriapButForms
 
 		void FillSettingControls()
 		{
-			numericCardGridX.Value = SettingsData.cardgrid.x;
-			numericCardGridY.Value = SettingsData.cardgrid.y;
-			labelImages.Text = SettingsData.images.allowed.ToString();
-			numericMaximumImages.Value = SettingsData.images.total;
-			numericPairs.Value = SettingsData.duplicates;
+			inputCardsX.Value = SettingsData.cardgrid.x;
+			inputCardsY.Value = SettingsData.cardgrid.y;
+			labelTotalCards.Text = $"= {SettingsData.cardgrid.Area()}";
+			inputCardImages.Text = SettingsData.images.allowed.ToString();
+			inputMaxCardImages.Value = SettingsData.images.total;
+			inputCardPairs.Value = SettingsData.duplicates;
+			inputDifficulty.SelectedItem = inputDifficulty.Items[(int)SettingsData.difficulty];
 		}
 
-		private void FormForSettings_Load(object sender, EventArgs e)
+		private void SettingsLoad(object sender, EventArgs e)
 		{
 
 		}
 
-		private void buttonBack_Click(object sender, EventArgs e)
+		private void buttonBackClick(object sender, EventArgs e)
 		{
 			PublicItems.BackToStart(this, sender, e);
 		}
 
-		private void buttonSave_Click(object sender, EventArgs e)
+		private void buttonSaveClick(object sender, EventArgs e)
 		{
 			Console.WriteLine("! ERROR : Save  button not implemented!");
 		}
 
-		private void numericCardGridX_ValueChanged(object sender, EventArgs e)
+		private void inputCardsXChanged(object sender, EventArgs e)
 		{
-			SettingsData.cardgrid.x = (int)numericCardGridX.Value;
+			SettingsData.cardgrid.x = (int)inputCardsX.Value;
 		}
 
-		private void numericCardGridY_ValueChanged(object sender, EventArgs e)
+		private void inputCardsYChanged(object sender, EventArgs e)
 		{
-			SettingsData.cardgrid.y = (int)numericCardGridY.Value;
+			SettingsData.cardgrid.y = (int)inputCardsY.Value;
 		}
 
-		private void numericMaximumImages_ValueChanged(object sender, EventArgs e)
+		private void inputMaxCardImagesChanged(object sender, EventArgs e)
 		{
-			SettingsData.images.total = (int)numericMaximumImages.Value;
+			SettingsData.images.total = (int)inputMaxCardImages.Value;
 		}
+	}
+
+	public static class Extensions
+	{
+		public static string ToString(this Settings.SriapSettings.DifficultyMode difficulty) => difficulty switch
+		{
+			Settings.SriapSettings.DifficultyMode.Normal => "Normal",
+			Settings.SriapSettings.DifficultyMode.Easy => "Easy",
+			_ => "ERROR: NONEXSISTENT DIFFICULTY MODE",
+		};
 	}
 }

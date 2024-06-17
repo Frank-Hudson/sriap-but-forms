@@ -18,28 +18,30 @@ namespace SriapButForms
 		class Score
 		{
 			public int score { get; }
+			public string time { get; }
 			public string user { get; }
 
-			public Score(int score, string user)
+			public Score(int score, string time, string user)
 			{
 				this.score = score;
+				this.time = time;
 				this.user = user;
 			}
 
-			public Score(string[] scoreUserPair)
+			public Score(string[] playerScoreParts)
 			{
-				if (scoreUserPair.Length >= 2)
-				{
-					this.user = scoreUserPair[1];
-				}
-				else
-				{
-					this.user = "#! NO USERNAME";
-				}
-				this.score = int.Parse(scoreUserPair[0]);
+				this.user = playerScoreParts.Length >= 3 ? playerScoreParts[2] : "#! NO USERNAME";
+				this.score = int.Parse(playerScoreParts[0]);
+
+				string timePart = playerScoreParts[1];
+				List<char> timePartList = timePart.ToList();
+				timePartList.Remove('(');
+				timePartList.Remove(')');
+
+				this.time = new(timePartList.ToArray());
 			}
 
-			public override string ToString() => $"{this.score} {this.user}";
+			public override string ToString() => $"{this.score} ({this.time}) {this.user}";
 
 			public int CompareTo(Score other) => this.score.CompareTo(other.score);
 
@@ -72,7 +74,7 @@ namespace SriapButForms
 
 			for (int i = 0; i < scoresLines.Length; i++)
 			{
-				string[] scoreUserPair = scoresLines[i].Split(' ', 2);
+				string[] scoreUserPair = scoresLines[i].Split(' ', 3);
 				try
 				{
 					scores.Add(new Score(scoreUserPair));
@@ -95,7 +97,7 @@ namespace SriapButForms
 
 			for (int i = 0; i < scores.Count; i++)
 			{
-				tableHighScores.Rows.Add(new[] { scores[i].score.ToString(), scores[i].user });
+				tableHighScores.Rows.Add(new string[3] { scores[i].score.ToString(), scores[i].time, scores[i].user });
 			}
 		}
 	}

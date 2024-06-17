@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace SriapButForms
 {
-	partial class About : Form
+	public partial class About : Form
 	{
 		public About()
 		{

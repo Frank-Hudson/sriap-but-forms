@@ -31,23 +31,27 @@ namespace SriapButForms
 		{
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Scores));
 			this.pictureTitle = new System.Windows.Forms.PictureBox();
 			this.labelTitle = new System.Windows.Forms.Label();
 			this.groupHighScoreMode = new System.Windows.Forms.GroupBox();
+			this.labelLayoutTitle = new System.Windows.Forms.Label();
 			this.radioHighScoresModeTable = new System.Windows.Forms.RadioButton();
 			this.radioHighScoresModeCards = new System.Windows.Forms.RadioButton();
 			this.buttonBack = new System.Windows.Forms.Button();
 			this.tableHighScores = new System.Windows.Forms.DataGridView();
 			this.ColumnScore = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.ColumnTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.ColumnUser = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.labelLayoutTitle = new System.Windows.Forms.Label();
+			this.pictureCycLogo = new System.Windows.Forms.PictureBox();
 			((System.ComponentModel.ISupportInitialize)(this.pictureTitle)).BeginInit();
 			this.groupHighScoreMode.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.tableHighScores)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.pictureCycLogo)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// pictureTitle
@@ -92,6 +96,18 @@ namespace SriapButForms
 			this.groupHighScoreMode.TabIndex = 3;
 			this.groupHighScoreMode.TabStop = false;
 			// 
+			// labelLayoutTitle
+			// 
+			this.labelLayoutTitle.Anchor = System.Windows.Forms.AnchorStyles.Top;
+			this.labelLayoutTitle.AutoSize = true;
+			this.labelLayoutTitle.Font = new System.Drawing.Font("JetBrains Mono", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+			this.labelLayoutTitle.ForeColor = System.Drawing.Color.White;
+			this.labelLayoutTitle.Location = new System.Drawing.Point(37, 28);
+			this.labelLayoutTitle.Name = "labelLayoutTitle";
+			this.labelLayoutTitle.Size = new System.Drawing.Size(70, 21);
+			this.labelLayoutTitle.TabIndex = 8;
+			this.labelLayoutTitle.Text = "Layout";
+			// 
 			// radioHighScoresModeTable
 			// 
 			this.radioHighScoresModeTable.AutoSize = true;
@@ -108,6 +124,7 @@ namespace SriapButForms
 			// radioHighScoresModeCards
 			// 
 			this.radioHighScoresModeCards.AutoSize = true;
+			this.radioHighScoresModeCards.Enabled = false;
 			this.radioHighScoresModeCards.ForeColor = System.Drawing.Color.White;
 			this.radioHighScoresModeCards.Location = new System.Drawing.Point(17, 57);
 			this.radioHighScoresModeCards.Name = "radioHighScoresModeCards";
@@ -160,17 +177,18 @@ namespace SriapButForms
 			this.tableHighScores.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
 			this.tableHighScores.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ColumnScore,
+            this.ColumnTime,
             this.ColumnUser});
-			dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-			dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.ControlDark;
-			dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-			dataGridViewCellStyle5.ForeColor = System.Drawing.Color.White;
-			dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.Silver;
-			dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-			dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-			this.tableHighScores.DefaultCellStyle = dataGridViewCellStyle5;
+			dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.ControlDark;
+			dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+			dataGridViewCellStyle6.ForeColor = System.Drawing.Color.White;
+			dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.Silver;
+			dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+			this.tableHighScores.DefaultCellStyle = dataGridViewCellStyle6;
 			this.tableHighScores.EnableHeadersVisualStyles = false;
-			this.tableHighScores.Location = new System.Drawing.Point(344, 170);
+			this.tableHighScores.Location = new System.Drawing.Point(314, 168);
 			this.tableHighScores.Name = "tableHighScores";
 			this.tableHighScores.ReadOnly = true;
 			this.tableHighScores.RowHeadersVisible = false;
@@ -179,7 +197,7 @@ namespace SriapButForms
 			this.tableHighScores.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
 			this.tableHighScores.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
 			this.tableHighScores.ShowEditingIcon = false;
-			this.tableHighScores.Size = new System.Drawing.Size(261, 322);
+			this.tableHighScores.Size = new System.Drawing.Size(320, 322);
 			this.tableHighScores.TabIndex = 7;
 			// 
 			// ColumnScore
@@ -195,35 +213,48 @@ namespace SriapButForms
 			this.ColumnScore.Resizable = System.Windows.Forms.DataGridViewTriState.False;
 			this.ColumnScore.Width = 80;
 			// 
+			// ColumnTime
+			// 
+			dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			this.ColumnTime.DefaultCellStyle = dataGridViewCellStyle4;
+			this.ColumnTime.HeaderText = "Time";
+			this.ColumnTime.MaxInputLength = 5;
+			this.ColumnTime.Name = "ColumnTime";
+			this.ColumnTime.ReadOnly = true;
+			this.ColumnTime.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+			this.ColumnTime.Width = 60;
+			// 
 			// ColumnUser
 			// 
-			dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-			dataGridViewCellStyle4.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
-			dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-			this.ColumnUser.DefaultCellStyle = dataGridViewCellStyle4;
+			dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle5.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
+			dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+			this.ColumnUser.DefaultCellStyle = dataGridViewCellStyle5;
 			this.ColumnUser.HeaderText = "Username";
 			this.ColumnUser.Name = "ColumnUser";
 			this.ColumnUser.ReadOnly = true;
+			this.ColumnUser.Resizable = System.Windows.Forms.DataGridViewTriState.False;
 			this.ColumnUser.Width = 180;
 			// 
-			// labelLayoutTitle
+			// pictureCycLogo
 			// 
-			this.labelLayoutTitle.Anchor = System.Windows.Forms.AnchorStyles.Top;
-			this.labelLayoutTitle.AutoSize = true;
-			this.labelLayoutTitle.Font = new System.Drawing.Font("JetBrains Mono", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-			this.labelLayoutTitle.ForeColor = System.Drawing.Color.White;
-			this.labelLayoutTitle.Location = new System.Drawing.Point(37, 28);
-			this.labelLayoutTitle.Name = "labelLayoutTitle";
-			this.labelLayoutTitle.Size = new System.Drawing.Size(70, 21);
-			this.labelLayoutTitle.TabIndex = 8;
-			this.labelLayoutTitle.Text = "Layout";
+			this.pictureCycLogo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+			this.pictureCycLogo.ErrorImage = global::SriapButForms.Properties.Resources.CardError;
+			this.pictureCycLogo.Image = global::SriapButForms.Properties.Resources.coleg_y_cymoedd_icon_arch_green_on_black;
+			this.pictureCycLogo.Location = new System.Drawing.Point(12, 12);
+			this.pictureCycLogo.Name = "pictureCycLogo";
+			this.pictureCycLogo.Size = new System.Drawing.Size(100, 100);
+			this.pictureCycLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+			this.pictureCycLogo.TabIndex = 10;
+			this.pictureCycLogo.TabStop = false;
 			// 
-			// FormForHighScores
+			// Scores
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
 			this.ClientSize = new System.Drawing.Size(960, 540);
+			this.Controls.Add(this.pictureCycLogo);
 			this.Controls.Add(this.tableHighScores);
 			this.Controls.Add(this.buttonBack);
 			this.Controls.Add(this.groupHighScoreMode);
@@ -231,7 +262,7 @@ namespace SriapButForms
 			this.Controls.Add(this.pictureTitle);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-			this.Name = "FormForHighScores";
+			this.Name = "Scores";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Sriap - High Scores";
 			this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
@@ -240,6 +271,7 @@ namespace SriapButForms
 			this.groupHighScoreMode.ResumeLayout(false);
 			this.groupHighScoreMode.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.tableHighScores)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.pictureCycLogo)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -254,8 +286,10 @@ namespace SriapButForms
 		private System.Windows.Forms.RadioButton radioHighScoresModeTable;
 		private System.Windows.Forms.Button buttonBack;
 		private System.Windows.Forms.DataGridView tableHighScores;
-		private System.Windows.Forms.DataGridViewTextBoxColumn ColumnScore;
-		private System.Windows.Forms.DataGridViewTextBoxColumn ColumnUser;
 		private System.Windows.Forms.Label labelLayoutTitle;
+		private System.Windows.Forms.DataGridViewTextBoxColumn ColumnScore;
+		private System.Windows.Forms.DataGridViewTextBoxColumn ColumnTime;
+		private System.Windows.Forms.DataGridViewTextBoxColumn ColumnUser;
+		private System.Windows.Forms.PictureBox pictureCycLogo;
 	}
 }

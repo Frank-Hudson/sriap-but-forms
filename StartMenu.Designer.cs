@@ -146,14 +146,14 @@ namespace SriapButForms
 			this.pictureCycLogo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
 			this.pictureCycLogo.ErrorImage = global::SriapButForms.Properties.Resources.CardError;
 			this.pictureCycLogo.Image = global::SriapButForms.Properties.Resources.coleg_y_cymoedd_icon_arch_green_on_black;
-			this.pictureCycLogo.Location = new System.Drawing.Point(12, 10);
+			this.pictureCycLogo.Location = new System.Drawing.Point(12, 12);
 			this.pictureCycLogo.Name = "pictureCycLogo";
 			this.pictureCycLogo.Size = new System.Drawing.Size(100, 100);
 			this.pictureCycLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
 			this.pictureCycLogo.TabIndex = 8;
 			this.pictureCycLogo.TabStop = false;
 			// 
-			// FormForStartMenu
+			// StartMenu
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -168,7 +168,7 @@ namespace SriapButForms
 			this.Controls.Add(this.buttonQuit);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-			this.Name = "FormForStartMenu";
+			this.Name = "StartMenu";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Sriap";
 			this.WindowState = System.Windows.Forms.FormWindowState.Maximized;

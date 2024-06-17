@@ -7,5 +7,6 @@
 		"allowed": 8,
 		"total": 10
 	},
-	"duplicates": 2
+	"duplicates": 2,
+	"difficulty": "Easy"
 }

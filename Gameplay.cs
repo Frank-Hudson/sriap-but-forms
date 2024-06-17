@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,7 +23,7 @@ namespace SriapButForms
 
 		const int CARD_TURNED_PAUSE = 500;
 
-		const int POINTS_FOR_PAIR_MATCH = 3;
+		const int POINTS_FOR_PAIR_MATCH = 5;
 
 		// ---- Settings ---- //
 
@@ -57,6 +58,8 @@ namespace SriapButForms
 
 		int PlayerScore = 0;
 
+		public string Username;
+
 		readonly Timer GameTimer = new() { Interval = 1000, };
 		TimeSpan GameTime = GameLength; // TODO: Difficulties; Easy 60s, Hard 30s
 
@@ -82,7 +85,7 @@ namespace SriapButForms
 			if (GameTime.Ticks < TimeSpan.TicksPerSecond)
 			{
 				GameTimer.Stop();
-				BroadcastOutcome(PlayerScore, PlayerScore == CardCount * POINTS_FOR_PAIR_MATCH);
+				BroadcastOutcome(PlayerScore == CardCount * POINTS_FOR_PAIR_MATCH);
 			}
 		}
 
@@ -97,14 +100,30 @@ namespace SriapButForms
 			labelCardsRemaining.Text = $"Cards: {CardCount - CorrectGuesses * 2}";
 		}
 
-		void BroadcastOutcome(int score, bool win)
+		void BroadcastOutcome(bool win)
 		{
-			GameOutcome formGameplayFinish = new(GameTime, score, win);
-			switch (formGameplayFinish.ShowDialog())
+			labelStatus.Text = win ? "YOU WIN!" : "YOU LOSE!"; 
+			labelScoreResult.Text = labelScore.Text;
+			labelTimeResult.Text = $"{GameLength - GameTime:mm':'ss}";
+			panelOutcome.Visible = true;
+		}
+
+		private void OutcomeClosed(object sender, EventArgs e)
+		{
+			switch ((sender as Button).Text)
 			{
-				case DialogResult.Retry: Setup(); break;
-				case DialogResult.Abort: buttonBack.PerformClick(); break;
+				case "Replay": Setup(); break;
 			}
+		}
+
+		private void ButtonSaveScoreClicked(object sender, EventArgs e)
+		{
+			Username formUsername = new();
+			formUsername.ShowDialog();
+			Username = formUsername.GetUsername();
+			StreamWriter streamWriter = File.AppendText("Data/scores.txt");
+			streamWriter.WriteLine($"{PlayerScore} ({labelTimeResult.Text}) {Username}");
+			streamWriter.Close();
 		}
 
 		Point GetCardLocation(int index)
@@ -239,7 +258,7 @@ namespace SriapButForms
 					if (CorrectGuesses == PairCount)
 					{
 						GameTimer.Stop();
-						BroadcastOutcome(PlayerScore, true);
+						BroadcastOutcome(true);
 					}
 				}
 				else

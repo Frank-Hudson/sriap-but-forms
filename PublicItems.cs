@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,7 +8,7 @@ using System.Windows.Forms;
 
 namespace SriapButForms
 {
-	class PublicItems
+	public static class PublicItems
 	{
 		public static StartMenu formStart = new();
 		public static About formAbout = new();
@@ -17,8 +18,7 @@ namespace SriapButForms
 
 
 		/// <summary>
-		/// From 
-		/// <see cref="https://stackoverflow.com/questions/10458118/wait-one-second-in-running-program#:~:text=Wait%20function%20using,wait%20one%20second"/>
+		/// Copied from <see cref="https://stackoverflow.com/questions/10458118/wait-one-second-in-running-program#:~:text=Wait%20function%20using,wait%20one%20second"/>
 		/// </summary>
 		public static void Wait(int milliseconds)
 		{
@@ -41,6 +41,13 @@ namespace SriapButForms
 			{
 				Application.DoEvents();
 			}
+		}
+
+
+		public void DropShadow(object sender, PaintEventArgs e)
+		{
+			Panel targetPanel = (sender as Panel);
+			Color[] shadow = new Color[3] {};
 		}
 
 
