@@ -104,7 +104,7 @@ namespace SriapButForms
 			this.labelScore.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.labelScore.Font = new System.Drawing.Font("JetBrains Mono", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
 			this.labelScore.ForeColor = System.Drawing.Color.White;
-			this.labelScore.Location = new System.Drawing.Point(12, 389);
+			this.labelScore.Location = new System.Drawing.Point(12, 181);
 			this.labelScore.Name = "labelScore";
 			this.labelScore.Size = new System.Drawing.Size(166, 38);
 			this.labelScore.TabIndex = 5;
@@ -118,7 +118,7 @@ namespace SriapButForms
 			this.labelRemaining.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.labelRemaining.Font = new System.Drawing.Font("JetBrains Mono", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
 			this.labelRemaining.ForeColor = System.Drawing.Color.White;
-			this.labelRemaining.Location = new System.Drawing.Point(12, 171);
+			this.labelRemaining.Location = new System.Drawing.Point(12, 251);
 			this.labelRemaining.Name = "labelRemaining";
 			this.labelRemaining.Size = new System.Drawing.Size(166, 38);
 			this.labelRemaining.TabIndex = 6;
@@ -132,7 +132,7 @@ namespace SriapButForms
 			this.labelTimeRemaining.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.labelTimeRemaining.Font = new System.Drawing.Font("JetBrains Mono", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
 			this.labelTimeRemaining.ForeColor = System.Drawing.Color.White;
-			this.labelTimeRemaining.Location = new System.Drawing.Point(38, 229);
+			this.labelTimeRemaining.Location = new System.Drawing.Point(38, 309);
 			this.labelTimeRemaining.Name = "labelTimeRemaining";
 			this.labelTimeRemaining.Size = new System.Drawing.Size(116, 29);
 			this.labelTimeRemaining.TabIndex = 7;
@@ -146,7 +146,7 @@ namespace SriapButForms
 			this.labelCardsRemaining.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.labelCardsRemaining.Font = new System.Drawing.Font("JetBrains Mono", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
 			this.labelCardsRemaining.ForeColor = System.Drawing.Color.White;
-			this.labelCardsRemaining.Location = new System.Drawing.Point(38, 282);
+			this.labelCardsRemaining.Location = new System.Drawing.Point(38, 362);
 			this.labelCardsRemaining.Name = "labelCardsRemaining";
 			this.labelCardsRemaining.Size = new System.Drawing.Size(116, 29);
 			this.labelCardsRemaining.TabIndex = 8;
