@@ -14,4 +14,4 @@ There is No Copyright or License on this product.
 
 ## Icon
 
-![sriap icon](./Assets/icon_2.ico)
+![sriap icon](./icon_2.ico)
