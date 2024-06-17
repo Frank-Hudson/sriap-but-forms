@@ -12,6 +12,6 @@ This is a simple pairs game application, built in the windows forms C# framework
 
 There is No Copyright or License on this product.
 
-## Icon
+## Logo
 
 ![sriap icon](./icon_2.ico)
