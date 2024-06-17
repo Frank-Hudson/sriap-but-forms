@@ -105,12 +105,13 @@ namespace SriapButForms
 			labelStatus.Text = win ? "YOU WIN!" : "YOU LOSE!"; 
 			labelScoreResult.Text = labelScore.Text;
 			labelTimeResult.Text = $"{GameLength - GameTime:mm':'ss}";
-			panelOutcome.Visible = true;
+			panelOutcome.Show();
 		}
 
 		private void OutcomeClosed(object sender, EventArgs e)
 		{
-			switch ((sender as Button).Text)
+			var outcomeCloser = (sender as Button); 
+			switch (outcomeCloser.Text)
 			{
 				case "Replay": Setup(); break;
 			}
@@ -141,7 +142,7 @@ namespace SriapButForms
 
 		void Setup()
 		{
-			Random randomGenerator = new();
+			panelOutcome.Hide(); 	
 
 			PlayerScore = 0;
 			labelScore.Text = $"Score {PlayerScore}";
@@ -154,19 +155,43 @@ namespace SriapButForms
 			GameTime = GameLength;
 			labelTimeRemaining.Text = "--:--";
 
-			int firstExcludedImageIndex = randomGenerator.Next(ImageCount) + 1;
-			int[] remainingImages = Enumerable.Range(1, ImageCount)
-				.Where(numberItem => numberItem != firstExcludedImageIndex).ToArray();
-			int secondExcludedImageIndex = remainingImages[randomGenerator.Next(ImageCount - 1)];
-			int[] usableImageIndices = remainingImages
-				.Where((numberItem, index) => numberItem != secondExcludedImageIndex).ToArray();
+			Random random = new();
 
-			List<int> usableImages = usableImageIndices.Concat(usableImageIndices).ToList();
+			/* --repetition-- {{ */
+
+			// Generate an index for the first image to be removed from the
+			// ones used
+			int firstExcludedImageIndex = random.Next(ImageCount) + 1;
+			// Create a sequence with all numbers from 1 to the Image Count to
+			// represent the indices of the images
+			int[] remainingImageIndices = Enumerable.Range(1, ImageCount)
+				// Filter out the initial excluded image
+				.Where(numberItem => numberItem != firstExcludedImageIndex)
+				// Transform the IEnumerable result into an array
+				.ToArray();
+
+			// TODO: ˄˄ Could be a loop? ˅˅
+
+			// Generate a second excluded image index, this time up to one less
+			// than before, due to the previous removal
+			int secondExcludedImageIndex = remainingImageIndices[random.Next(ImageCount - 1)];
+			// Once again, remove the excluded index from the final list of
+			// image indices
+			int[] usableImageIndices = remainingImageIndices
+				.Where((numberItem, index) => numberItem != secondExcludedImageIndex)
+				.ToArray();
+
+			/* }} --repetition-- */
+
+			List<int> usableImages = usableImageIndices
+				.Concat(usableImageIndices)
+				.ToList();
 			List<int> usedImages = new(CardCount);
 
 			for (int i = 0; i < CardCount; i++)
 			{
-				int currentImageIndex = randomGenerator.Next(0, usableImages.Count);
+				int currentImageIndex = random.Next(0, usableImages.Count);
+
 				usedImages.Add(usableImages[currentImageIndex] + 1);
 
 				Point cardLocation = GetCardLocation(i);
