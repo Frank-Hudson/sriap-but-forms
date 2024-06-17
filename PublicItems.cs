@@ -44,11 +44,13 @@ namespace SriapButForms
 		}
 
 
-		public void DropShadow(object sender, PaintEventArgs e)
-		{
-			Panel targetPanel = (sender as Panel);
-			Color[] shadow = new Color[3] {};
-		}
+		////public void DropShadow(object sender, PaintEventArgs e)
+		////{
+		////	Panel targetPanel = (sender as Panel);
+		////	Color[] shadow = new Color[3] {
+		////	
+		////	};
+		////}
 
 
 		public static void BackToStart(Form form, object sender, EventArgs e)
