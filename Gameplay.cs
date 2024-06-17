@@ -30,7 +30,7 @@ namespace SriapButForms
 		static readonly int CardRows = PublicItems.formSettings.SettingsData.cardgrid.x;
 		static readonly int CardColumns = PublicItems.formSettings.SettingsData.cardgrid.y;
 
-		static readonly int ImageCount = PublicItems.formSettings.SettingsData.images.total;
+		static readonly int ImageCount = PublicItems.formSettings.SettingsData.images.loaded;
 
 		static readonly int Pairs = PublicItems.formSettings.SettingsData.duplicates;
 

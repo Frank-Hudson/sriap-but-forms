@@ -58,5 +58,7 @@ namespace SriapButForms
 			form.Hide();
 			formStart.Show();
 		}
+
+		public static bool Divisible(float x, float y) => x % y == 0;
 	}
 }

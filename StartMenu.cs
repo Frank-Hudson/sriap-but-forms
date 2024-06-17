@@ -17,7 +17,7 @@ namespace SriapButForms
 			InitializeComponent();
 		}
 
-		private void GoToForm(Form form)
+		private void GoTo(Form form)
 		{
 			this.Hide();
 			form.Show();
@@ -25,22 +25,22 @@ namespace SriapButForms
 
 		private void buttonPlay_Click(object sender, EventArgs e)
 		{
-			GoToForm(PublicItems.formGameplay);
+			GoTo(PublicItems.formGameplay);
 		}
 
 		private void buttonHighScores_Click(object sender, EventArgs e)
 		{
-			GoToForm(PublicItems.formScores);
+			GoTo(PublicItems.formScores);
 		}
 
 		private void buttonSettings_Click(object sender, EventArgs e)
 		{
-			GoToForm(PublicItems.formSettings);
+			PublicItems.formSettings.ShowDialog();
 		}
 
 		private void buttonAbout_Click(object sender, EventArgs e)
 		{
-			PublicItems.formAbout.Show();
+			PublicItems.formAbout.ShowDialog();
 		}
 
 		private void buttonQuit_Click(object sender, EventArgs e)

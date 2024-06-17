@@ -35,8 +35,8 @@ namespace SriapButForms
 
 			public struct AllowedTotal
 			{
-				public int allowed;
-				public int total;
+				public int used;
+				public int loaded;
 			}
 
 			public enum DifficultyMode
@@ -56,7 +56,7 @@ namespace SriapButForms
 			}
 			catch (JsonSerializationException jse)
 			{
-				MessageBox.Show($"There was an error serializing the settings JSON:\n{jse.Message}", "JSON Serialization Error");
+				MessageBox.Show($"There was an error deserializing the settings JSON:\n{jse.Message}", "JSON Serialization Error");
 				Application.Exit();
 			}
 			catch (PathTooLongException pe)
@@ -104,11 +104,22 @@ namespace SriapButForms
 		{
 			inputCardsX.Value = SettingsData.cardgrid.x;
 			inputCardsY.Value = SettingsData.cardgrid.y;
-			labelTotalCards.Text = $"= {SettingsData.cardgrid.Area()}";
-			inputCardImages.Text = SettingsData.images.allowed.ToString();
-			inputMaxCardImages.Value = SettingsData.images.total;
+			infoTotalCards.Text = $"= {SettingsData.cardgrid.Area()}";
+			inputCardImages.Text = SettingsData.images.used.ToString();
+			inputMaxCardImages.Value = SettingsData.images.loaded;
 			inputCardPairs.Value = SettingsData.duplicates;
 			inputDifficulty.SelectedItem = inputDifficulty.Items[(int)SettingsData.difficulty];
+			switch (SettingsData.cardgrid.Area() % (SettingsData.images.used * SettingsData.duplicates))
+			{
+				case 0:
+					outputValid.Text = "✓";
+					outputValid.ForeColor = Color.FromArgb(100, 230, 120);
+					break;
+				default:
+					outputValid.Text = "✗";
+					outputValid.ForeColor = Color.FromArgb(230, 100, 120);
+					break;
+			}
 		}
 
 		private void SettingsLoad(object sender, EventArgs e)
@@ -123,22 +134,78 @@ namespace SriapButForms
 
 		private void buttonSaveClick(object sender, EventArgs e)
 		{
-			Console.WriteLine("! ERROR : Save  button not implemented!");
+			// When the settings are saved, each is written to the
+			// Data/settings.json file as serialized JSON
+			try
+			{
+				File.WriteAllText(SETTINGS_FILE_PATH, JsonConvert.SerializeObject(SettingsData, Formatting.Indented));
+			}
+			catch (JsonSerializationException jse)
+			{
+				MessageBox.Show($"There was an error serializing the settings data to JSON:\n{jse.Message}", "JSON Serialization Error");
+				Application.Exit();
+			}
+			catch (PathTooLongException pe)
+			{
+				MessageBox.Show($"The path for the settings file is too long:\n{pe.Message}", "Path Error");
+				Application.Exit();
+			}
+			catch (FileNotFoundException fe)
+			{
+				MessageBox.Show($"The settings file wasn't found:\n{fe.Message}", "File Error");
+				Application.Exit();
+			}
+			catch (DirectoryNotFoundException de)
+			{
+				if (de.Message.Contains("settings.json"))
+				{
+					MessageBox.Show($"The `Data/settings.json` file is missing, please place the `Data` directory at the program's root\n(\"{AppDomain.CurrentDomain.BaseDirectory}\").\n\nThe relevant files can be found here: https://github.com/Frank-Hudson/sriap-but-forms/tree/master/Data", "Missing Files");
+				}
+				else
+				{
+					MessageBox.Show($"Directory not found opening `Data/settings.json`:\n{de.Message}", "Directory Error");
+				}
+				Application.Exit();
+			}
+			catch (UnauthorizedAccessException ae)
+			{
+				MessageBox.Show($"Access to the settings file is not permitted:\n{ae.Message}", "Access Error");
+				Application.Exit();
+			}
+			catch (IOException ioe)
+			{
+				MessageBox.Show($"There was an IO error writing settings:\n{ioe.Message}", "IO Error");
+				Application.Exit();
+			}
+			catch (Exception er)
+			{
+				MessageBox.Show($"There was an unidentified error writing settings:\n{er}", "Unidentified Error");
+				Application.Exit();
+			}
+
+			MessageBox.Show("Settings Saved Successfully!", "Success!");
 		}
 
 		private void inputCardsXChanged(object sender, EventArgs e)
 		{
 			SettingsData.cardgrid.x = (int)inputCardsX.Value;
+			inputCardsChanged(sender, e);
 		}
 
 		private void inputCardsYChanged(object sender, EventArgs e)
 		{
 			SettingsData.cardgrid.y = (int)inputCardsY.Value;
+			inputCardsChanged(sender, e);
+		}
+
+		private void inputCardsChanged(object sender, EventArgs e)
+		{
+			infoTotalCards.Text = $"= {SettingsData.cardgrid.Area()}";
 		}
 
 		private void inputMaxCardImagesChanged(object sender, EventArgs e)
 		{
-			SettingsData.images.total = (int)inputMaxCardImages.Value;
+			SettingsData.images.loaded = (int)inputMaxCardImages.Value;
 		}
 	}
 
