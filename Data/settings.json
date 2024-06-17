@@ -4,9 +4,9 @@
 		"y": 4
 	},
 	"images": {
-		"allowed": 8,
-		"total": 10
+		"used": 8,
+		"loaded": 10
 	},
 	"duplicates": 2,
-	"difficulty": "Easy"
+	"difficulty": 0
 }

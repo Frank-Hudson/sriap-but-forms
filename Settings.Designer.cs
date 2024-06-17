@@ -33,18 +33,18 @@ namespace SriapButForms
 			this.buttonBack = new System.Windows.Forms.Button();
 			this.pictureTitle = new System.Windows.Forms.PictureBox();
 			this.labelTitle = new System.Windows.Forms.Label();
-			this.inputMaxCardImages = new System.Windows.Forms.NumericUpDown();
+			this.inputLoadedImages = new System.Windows.Forms.NumericUpDown();
 			this.labelOutOfImages = new System.Windows.Forms.Label();
 			this.inputCardsY = new System.Windows.Forms.NumericUpDown();
 			this.labelByCardGrid = new System.Windows.Forms.Label();
 			this.inputCardsX = new System.Windows.Forms.NumericUpDown();
 			this.labelCardGrid = new System.Windows.Forms.Label();
 			this.labelMaxImages = new System.Windows.Forms.Label();
-			this.inputCardPairs = new System.Windows.Forms.NumericUpDown();
+			this.inputDuplicates = new System.Windows.Forms.NumericUpDown();
 			this.labelPairs = new System.Windows.Forms.Label();
 			this.buttonSave = new System.Windows.Forms.Button();
 			this.infoTotalCards = new System.Windows.Forms.Label();
-			this.inputCardImages = new System.Windows.Forms.NumericUpDown();
+			this.inputUsedImages = new System.Windows.Forms.NumericUpDown();
 			this.labelDifficulty = new System.Windows.Forms.Label();
 			this.inputDifficulty = new System.Windows.Forms.ComboBox();
 			this.pictureCycLogo = new System.Windows.Forms.PictureBox();
@@ -52,12 +52,13 @@ namespace SriapButForms
 			this.labelValid = new System.Windows.Forms.Label();
 			this.infoImages = new System.Windows.Forms.Label();
 			this.infoValid = new System.Windows.Forms.Label();
+			this.infoValidRule = new System.Windows.Forms.Label();
 			((System.ComponentModel.ISupportInitialize)(this.pictureTitle)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.inputMaxCardImages)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.inputLoadedImages)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.inputCardsY)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.inputCardsX)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.inputCardPairs)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.inputCardImages)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.inputDuplicates)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.inputUsedImages)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureCycLogo)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -73,7 +74,7 @@ namespace SriapButForms
 			this.buttonBack.Location = new System.Drawing.Point(12, 471);
 			this.buttonBack.Name = "buttonBack";
 			this.buttonBack.Size = new System.Drawing.Size(120, 35);
-			this.buttonBack.TabIndex = 7;
+			this.buttonBack.TabIndex = 6;
 			this.buttonBack.Text = "Close";
 			this.buttonBack.UseVisualStyleBackColor = false;
 			this.buttonBack.Click += new System.EventHandler(this.buttonBackClick);
@@ -104,21 +105,31 @@ namespace SriapButForms
 			this.labelTitle.TabIndex = 8;
 			this.labelTitle.Text = "Settings";
 			// 
-			// inputMaxCardImages
+			// inputLoadedImages
 			// 
-			this.inputMaxCardImages.Anchor = System.Windows.Forms.AnchorStyles.Top;
-			this.inputMaxCardImages.Font = new System.Drawing.Font("JetBrains Mono", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-			this.inputMaxCardImages.Location = new System.Drawing.Point(280, 220);
-			this.inputMaxCardImages.Name = "inputMaxCardImages";
-			this.inputMaxCardImages.Size = new System.Drawing.Size(59, 27);
-			this.inputMaxCardImages.TabIndex = 9;
-			this.inputMaxCardImages.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-			this.inputMaxCardImages.Value = new decimal(new int[] {
+			this.inputLoadedImages.Anchor = System.Windows.Forms.AnchorStyles.Top;
+			this.inputLoadedImages.Font = new System.Drawing.Font("JetBrains Mono", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+			this.inputLoadedImages.Location = new System.Drawing.Point(280, 220);
+			this.inputLoadedImages.Maximum = new decimal(new int[] {
+            98,
+            0,
+            0,
+            0});
+			this.inputLoadedImages.Minimum = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+			this.inputLoadedImages.Name = "inputLoadedImages";
+			this.inputLoadedImages.Size = new System.Drawing.Size(59, 27);
+			this.inputLoadedImages.TabIndex = 3;
+			this.inputLoadedImages.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+			this.inputLoadedImages.Value = new decimal(new int[] {
             10,
             0,
             0,
             0});
-			this.inputMaxCardImages.ValueChanged += new System.EventHandler(this.inputMaxCardImagesChanged);
+			this.inputLoadedImages.ValueChanged += new System.EventHandler(this.inputLoadedImagesChanged);
 			// 
 			// labelOutOfImages
 			// 
@@ -139,9 +150,19 @@ namespace SriapButForms
 			this.inputCardsY.Anchor = System.Windows.Forms.AnchorStyles.Top;
 			this.inputCardsY.Font = new System.Drawing.Font("JetBrains Mono", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
 			this.inputCardsY.Location = new System.Drawing.Point(280, 171);
+			this.inputCardsY.Maximum = new decimal(new int[] {
+            14,
+            0,
+            0,
+            0});
+			this.inputCardsY.Minimum = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
 			this.inputCardsY.Name = "inputCardsY";
 			this.inputCardsY.Size = new System.Drawing.Size(59, 27);
-			this.inputCardsY.TabIndex = 11;
+			this.inputCardsY.TabIndex = 1;
 			this.inputCardsY.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
 			this.inputCardsY.Value = new decimal(new int[] {
             4,
@@ -169,9 +190,19 @@ namespace SriapButForms
 			this.inputCardsX.Anchor = System.Windows.Forms.AnchorStyles.Top;
 			this.inputCardsX.Font = new System.Drawing.Font("JetBrains Mono", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
 			this.inputCardsX.Location = new System.Drawing.Point(195, 171);
+			this.inputCardsX.Maximum = new decimal(new int[] {
+            14,
+            0,
+            0,
+            0});
+			this.inputCardsX.Minimum = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
 			this.inputCardsX.Name = "inputCardsX";
 			this.inputCardsX.Size = new System.Drawing.Size(59, 27);
-			this.inputCardsX.TabIndex = 13;
+			this.inputCardsX.TabIndex = 0;
 			this.inputCardsX.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
 			this.inputCardsX.Value = new decimal(new int[] {
             4,
@@ -206,20 +237,31 @@ namespace SriapButForms
 			this.labelMaxImages.Text = "Images";
 			this.labelMaxImages.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			// 
-			// inputCardPairs
+			// inputDuplicates
 			// 
-			this.inputCardPairs.Anchor = System.Windows.Forms.AnchorStyles.Top;
-			this.inputCardPairs.Font = new System.Drawing.Font("JetBrains Mono", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-			this.inputCardPairs.Location = new System.Drawing.Point(195, 273);
-			this.inputCardPairs.Name = "inputCardPairs";
-			this.inputCardPairs.Size = new System.Drawing.Size(59, 27);
-			this.inputCardPairs.TabIndex = 17;
-			this.inputCardPairs.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-			this.inputCardPairs.Value = new decimal(new int[] {
+			this.inputDuplicates.Anchor = System.Windows.Forms.AnchorStyles.Top;
+			this.inputDuplicates.Font = new System.Drawing.Font("JetBrains Mono", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+			this.inputDuplicates.Location = new System.Drawing.Point(195, 273);
+			this.inputDuplicates.Maximum = new decimal(new int[] {
+            7,
+            0,
+            0,
+            0});
+			this.inputDuplicates.Minimum = new decimal(new int[] {
             2,
             0,
             0,
             0});
+			this.inputDuplicates.Name = "inputDuplicates";
+			this.inputDuplicates.Size = new System.Drawing.Size(59, 27);
+			this.inputDuplicates.TabIndex = 4;
+			this.inputDuplicates.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+			this.inputDuplicates.Value = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+			this.inputDuplicates.ValueChanged += new System.EventHandler(this.inputDuplicatesChanged);
 			// 
 			// labelPairs
 			// 
@@ -246,7 +288,7 @@ namespace SriapButForms
 			this.buttonSave.Location = new System.Drawing.Point(330, 471);
 			this.buttonSave.Name = "buttonSave";
 			this.buttonSave.Size = new System.Drawing.Size(120, 35);
-			this.buttonSave.TabIndex = 19;
+			this.buttonSave.TabIndex = 7;
 			this.buttonSave.Text = "Save";
 			this.buttonSave.UseVisualStyleBackColor = false;
 			this.buttonSave.Click += new System.EventHandler(this.buttonSaveClick);
@@ -265,20 +307,31 @@ namespace SriapButForms
 			this.infoTotalCards.Text = "= ";
 			this.infoTotalCards.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
-			// inputCardImages
+			// inputUsedImages
 			// 
-			this.inputCardImages.Anchor = System.Windows.Forms.AnchorStyles.Top;
-			this.inputCardImages.Font = new System.Drawing.Font("JetBrains Mono", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-			this.inputCardImages.Location = new System.Drawing.Point(195, 220);
-			this.inputCardImages.Name = "inputCardImages";
-			this.inputCardImages.Size = new System.Drawing.Size(59, 27);
-			this.inputCardImages.TabIndex = 21;
-			this.inputCardImages.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-			this.inputCardImages.Value = new decimal(new int[] {
+			this.inputUsedImages.Anchor = System.Windows.Forms.AnchorStyles.Top;
+			this.inputUsedImages.Font = new System.Drawing.Font("JetBrains Mono", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+			this.inputUsedImages.Location = new System.Drawing.Point(195, 220);
+			this.inputUsedImages.Maximum = new decimal(new int[] {
+            98,
+            0,
+            0,
+            0});
+			this.inputUsedImages.Minimum = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+			this.inputUsedImages.Name = "inputUsedImages";
+			this.inputUsedImages.Size = new System.Drawing.Size(59, 27);
+			this.inputUsedImages.TabIndex = 2;
+			this.inputUsedImages.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+			this.inputUsedImages.Value = new decimal(new int[] {
             8,
             0,
             0,
             0});
+			this.inputUsedImages.ValueChanged += new System.EventHandler(this.inputUsedImagesChanged);
 			// 
 			// labelDifficulty
 			// 
@@ -286,7 +339,7 @@ namespace SriapButForms
 			this.labelDifficulty.BackColor = System.Drawing.Color.Transparent;
 			this.labelDifficulty.Font = new System.Drawing.Font("JetBrains Mono", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
 			this.labelDifficulty.ForeColor = System.Drawing.Color.White;
-			this.labelDifficulty.Location = new System.Drawing.Point(25, 405);
+			this.labelDifficulty.Location = new System.Drawing.Point(25, 422);
 			this.labelDifficulty.Name = "labelDifficulty";
 			this.labelDifficulty.Size = new System.Drawing.Size(158, 27);
 			this.labelDifficulty.TabIndex = 22;
@@ -301,10 +354,10 @@ namespace SriapButForms
 			this.inputDifficulty.Items.AddRange(new object[] {
             "Normal",
             "Easy"});
-			this.inputDifficulty.Location = new System.Drawing.Point(192, 405);
+			this.inputDifficulty.Location = new System.Drawing.Point(192, 422);
 			this.inputDifficulty.Name = "inputDifficulty";
 			this.inputDifficulty.Size = new System.Drawing.Size(153, 27);
-			this.inputDifficulty.TabIndex = 23;
+			this.inputDifficulty.TabIndex = 5;
 			this.inputDifficulty.Text = "Easy";
 			// 
 			// pictureCycLogo
@@ -367,12 +420,26 @@ namespace SriapButForms
 			this.infoValid.BackColor = System.Drawing.Color.Transparent;
 			this.infoValid.Font = new System.Drawing.Font("JetBrains Mono", 8.999999F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point);
 			this.infoValid.ForeColor = System.Drawing.Color.Silver;
-			this.infoValid.Location = new System.Drawing.Point(12, 353);
+			this.infoValid.Location = new System.Drawing.Point(77, 345);
 			this.infoValid.Name = "infoValid";
-			this.infoValid.Size = new System.Drawing.Size(434, 16);
+			this.infoValid.Size = new System.Drawing.Size(322, 32);
 			this.infoValid.TabIndex = 28;
-			this.infoValid.Text = "Total Cards must be divisible by Used Images times Duplicates";
+			this.infoValid.Text = "Total Cards must be divisible by Used Images \r\nmultiplied by Duplicates exactly o" +
+    "nce";
 			this.infoValid.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			// 
+			// infoValidRule
+			// 
+			this.infoValidRule.Anchor = System.Windows.Forms.AnchorStyles.Top;
+			this.infoValidRule.BackColor = System.Drawing.Color.Transparent;
+			this.infoValidRule.Font = new System.Drawing.Font("JetBrains Mono", 8.999999F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point);
+			this.infoValidRule.ForeColor = System.Drawing.Color.Gray;
+			this.infoValidRule.Location = new System.Drawing.Point(67, 386);
+			this.infoValidRule.Name = "infoValidRule";
+			this.infoValidRule.Size = new System.Drawing.Size(337, 16);
+			this.infoValidRule.TabIndex = 29;
+			this.infoValidRule.Text = "cards / (images * duplicates) = x remainder y";
+			this.infoValidRule.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
 			// Settings
 			// 
@@ -380,6 +447,7 @@ namespace SriapButForms
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
 			this.ClientSize = new System.Drawing.Size(458, 518);
+			this.Controls.Add(this.infoValidRule);
 			this.Controls.Add(this.infoValid);
 			this.Controls.Add(this.infoImages);
 			this.Controls.Add(this.labelValid);
@@ -387,18 +455,18 @@ namespace SriapButForms
 			this.Controls.Add(this.pictureCycLogo);
 			this.Controls.Add(this.inputDifficulty);
 			this.Controls.Add(this.labelDifficulty);
-			this.Controls.Add(this.inputCardImages);
+			this.Controls.Add(this.inputUsedImages);
 			this.Controls.Add(this.infoTotalCards);
 			this.Controls.Add(this.buttonSave);
 			this.Controls.Add(this.labelPairs);
-			this.Controls.Add(this.inputCardPairs);
+			this.Controls.Add(this.inputDuplicates);
 			this.Controls.Add(this.labelMaxImages);
 			this.Controls.Add(this.labelCardGrid);
 			this.Controls.Add(this.inputCardsX);
 			this.Controls.Add(this.labelByCardGrid);
 			this.Controls.Add(this.inputCardsY);
 			this.Controls.Add(this.labelOutOfImages);
-			this.Controls.Add(this.inputMaxCardImages);
+			this.Controls.Add(this.inputLoadedImages);
 			this.Controls.Add(this.labelTitle);
 			this.Controls.Add(this.buttonBack);
 			this.Controls.Add(this.pictureTitle);
@@ -411,11 +479,11 @@ namespace SriapButForms
 			this.Text = "Sriap - Settings";
 			this.Load += new System.EventHandler(this.SettingsLoad);
 			((System.ComponentModel.ISupportInitialize)(this.pictureTitle)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.inputMaxCardImages)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.inputLoadedImages)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.inputCardsY)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.inputCardsX)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.inputCardPairs)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.inputCardImages)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.inputDuplicates)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.inputUsedImages)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureCycLogo)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
@@ -427,18 +495,18 @@ namespace SriapButForms
 		private System.Windows.Forms.Button buttonBack;
 		private System.Windows.Forms.PictureBox pictureTitle;
 		private System.Windows.Forms.Label labelTitle;
-		private System.Windows.Forms.NumericUpDown inputMaxCardImages;
+		private System.Windows.Forms.NumericUpDown inputLoadedImages;
 		private System.Windows.Forms.Label labelOutOfImages;
 		private System.Windows.Forms.NumericUpDown inputCardsY;
 		private System.Windows.Forms.Label labelByCardGrid;
 		private System.Windows.Forms.NumericUpDown inputCardsX;
 		private System.Windows.Forms.Label labelCardGrid;
 		private System.Windows.Forms.Label labelMaxImages;
-		private System.Windows.Forms.NumericUpDown inputCardPairs;
+		private System.Windows.Forms.NumericUpDown inputDuplicates;
 		private System.Windows.Forms.Label labelPairs;
 		private System.Windows.Forms.Button buttonSave;
 		private System.Windows.Forms.Label infoTotalCards;
-		private System.Windows.Forms.NumericUpDown inputCardImages;
+		private System.Windows.Forms.NumericUpDown inputUsedImages;
 		private System.Windows.Forms.Label labelDifficulty;
 		private System.Windows.Forms.ComboBox inputDifficulty;
 		private System.Windows.Forms.PictureBox pictureCycLogo;
@@ -446,5 +514,6 @@ namespace SriapButForms
 		private System.Windows.Forms.Label labelValid;
 		private System.Windows.Forms.Label infoImages;
 		private System.Windows.Forms.Label infoValid;
+		private System.Windows.Forms.Label infoValidRule;
 	}
 }

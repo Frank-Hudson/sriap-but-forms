@@ -46,9 +46,19 @@ namespace SriapButForms
 			}
 		}
 
+		private bool Valid;
+
 		public Settings()
 		{
 			InitializeComponent();
+
+			this.inputCardsX.ValueChanged += inputCardsChanged;
+			this.inputCardsX.ValueChanged += inputValidifiableChanged;
+			this.inputCardsY.ValueChanged += inputCardsChanged;
+			this.inputCardsY.ValueChanged += inputValidifiableChanged;
+			this.inputUsedImages.ValueChanged += inputValidifiableChanged;
+			this.inputLoadedImages.ValueChanged += inputValidifiableChanged;
+			this.inputDuplicates.ValueChanged += inputValidifiableChanged;
 
 			try
 			{
@@ -102,24 +112,29 @@ namespace SriapButForms
 
 		void FillSettingControls()
 		{
+			int totalCards = SettingsData.cardgrid.Area();
 			inputCardsX.Value = SettingsData.cardgrid.x;
 			inputCardsY.Value = SettingsData.cardgrid.y;
-			infoTotalCards.Text = $"= {SettingsData.cardgrid.Area()}";
-			inputCardImages.Text = SettingsData.images.used.ToString();
-			inputMaxCardImages.Value = SettingsData.images.loaded;
-			inputCardPairs.Value = SettingsData.duplicates;
+			infoTotalCards.Text = $"= {totalCards}";
+			inputUsedImages.Value = SettingsData.images.used;
+			inputLoadedImages.Value = SettingsData.images.loaded;
+			inputDuplicates.Value = SettingsData.duplicates;
 			inputDifficulty.SelectedItem = inputDifficulty.Items[(int)SettingsData.difficulty];
-			switch (SettingsData.cardgrid.Area() % (SettingsData.images.used * SettingsData.duplicates))
+			int totalPlayCards = SettingsData.images.used * SettingsData.duplicates;
+			int result = totalCards / totalPlayCards;
+			int remainder = totalCards % totalPlayCards;
+			Valid = result == 1 && remainder == 0 && inputUsedImages.Value <= inputLoadedImages.Value;
+			if (Valid)
 			{
-				case 0:
-					outputValid.Text = "✓";
-					outputValid.ForeColor = Color.FromArgb(100, 230, 120);
-					break;
-				default:
-					outputValid.Text = "✗";
-					outputValid.ForeColor = Color.FromArgb(230, 100, 120);
-					break;
+				outputValid.Text = "✓";
+				outputValid.ForeColor = Color.FromArgb(100, 230, 120);
 			}
+			else
+			{
+				outputValid.Text = "✗";
+				outputValid.ForeColor = Color.FromArgb(230, 100, 120);
+			}
+			infoValidRule.Text = $"{totalCards} / ({SettingsData.images.used} * {SettingsData.duplicates}) = {result} remainder {remainder}";
 		}
 
 		private void SettingsLoad(object sender, EventArgs e)
@@ -134,6 +149,11 @@ namespace SriapButForms
 
 		private void buttonSaveClick(object sender, EventArgs e)
 		{
+			if (!Valid)
+			{
+				MessageBox.Show();
+			}
+
 			// When the settings are saved, each is written to the
 			// Data/settings.json file as serialized JSON
 			try
@@ -189,13 +209,11 @@ namespace SriapButForms
 		private void inputCardsXChanged(object sender, EventArgs e)
 		{
 			SettingsData.cardgrid.x = (int)inputCardsX.Value;
-			inputCardsChanged(sender, e);
 		}
 
 		private void inputCardsYChanged(object sender, EventArgs e)
 		{
 			SettingsData.cardgrid.y = (int)inputCardsY.Value;
-			inputCardsChanged(sender, e);
 		}
 
 		private void inputCardsChanged(object sender, EventArgs e)
@@ -203,9 +221,24 @@ namespace SriapButForms
 			infoTotalCards.Text = $"= {SettingsData.cardgrid.Area()}";
 		}
 
-		private void inputMaxCardImagesChanged(object sender, EventArgs e)
+		private void inputDuplicatesChanged(object sender, EventArgs e)
 		{
-			SettingsData.images.loaded = (int)inputMaxCardImages.Value;
+			SettingsData.duplicates = (int)inputDuplicates.Value;
+		}
+
+		private void inputLoadedImagesChanged(object sender, EventArgs e)
+		{
+			SettingsData.images.loaded = (int)inputLoadedImages.Value;
+		}
+
+		private void inputUsedImagesChanged(object sender, EventArgs e)
+		{
+			SettingsData.images.used = (int)inputUsedImages.Value;
+		}
+
+		private void inputValidifiableChanged(object sender, EventArgs e)
+		{
+			FillSettingControls();
 		}
 	}
 
