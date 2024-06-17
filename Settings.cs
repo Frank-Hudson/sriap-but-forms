@@ -128,11 +128,13 @@ namespace SriapButForms
 			{
 				outputValid.Text = "✓";
 				outputValid.ForeColor = Color.FromArgb(100, 230, 120);
+				buttonSave.Enabled = true;
 			}
 			else
 			{
 				outputValid.Text = "✗";
 				outputValid.ForeColor = Color.FromArgb(230, 100, 120);
+				buttonSave.Enabled = false;
 			}
 			infoValidRule.Text = $"{totalCards} / ({SettingsData.images.used} * {SettingsData.duplicates}) = {result} remainder {remainder}";
 		}
@@ -149,11 +151,6 @@ namespace SriapButForms
 
 		private void buttonSaveClick(object sender, EventArgs e)
 		{
-			if (!Valid)
-			{
-				MessageBox.Show();
-			}
-
 			// When the settings are saved, each is written to the
 			// Data/settings.json file as serialized JSON
 			try

@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static SriapButForms.Settings.SriapSettings;
 
 namespace SriapButForms
 {
@@ -34,7 +35,13 @@ namespace SriapButForms
 
 		static readonly int Pairs = PublicItems.formSettings.SettingsData.duplicates;
 
-		static readonly TimeSpan GameLength = TimeSpan.FromSeconds(60); // TimeSpan.FromSeconds(PublicItems.formSettings.SettingsData.time);
+		static readonly DifficultyMode Difficulty = PublicItems.formSettings.SettingsData.difficulty;
+
+		static readonly TimeSpan GameLength = Difficulty switch
+		{
+			DifficultyMode.Normal => TimeSpan.FromSeconds(30),
+			_ => TimeSpan.FromSeconds(60), // DifficultyMode.Easy (but apparently enums in C# can be more than just the values you give them!)
+		};
 
 
 		static readonly int CardCount = CardRows * CardColumns;
@@ -102,15 +109,19 @@ namespace SriapButForms
 
 		void BroadcastOutcome(bool win)
 		{
-			labelStatus.Text = win ? "YOU WIN!" : "YOU LOSE!"; 
+			labelStatus.Text = win ? "YOU WIN!" : "YOU LOSE!";
 			labelScoreResult.Text = labelScore.Text;
 			labelTimeResult.Text = $"{GameLength - GameTime:mm':'ss}";
+			foreach (Card card in CardComponents)
+			{
+				card.Enabled = false;
+			}
 			panelOutcome.Show();
 		}
 
 		private void OutcomeClosed(object sender, EventArgs e)
 		{
-			var outcomeCloser = (sender as Button); 
+			var outcomeCloser = (sender as Button);
 			switch (outcomeCloser.Text)
 			{
 				case "Replay": Setup(); break;
@@ -142,7 +153,7 @@ namespace SriapButForms
 
 		void Setup()
 		{
-			panelOutcome.Hide(); 	
+			panelOutcome.Hide();
 
 			PlayerScore = 0;
 			labelScore.Text = $"Score {PlayerScore}";
@@ -239,7 +250,7 @@ namespace SriapButForms
 		{
 			if (!GameTimer.Enabled)
 			{
-				labelTimeRemaining.Text = $"01:00";
+				labelTimeRemaining.Text = Difficulty switch { DifficultyMode.Normal => $"00:30", _ => $"01:00", };
 				GameTimer.Start();
 			}
 			CardTimer.Start();
