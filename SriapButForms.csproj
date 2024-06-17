@@ -15,7 +15,7 @@
     <RepositoryUrl>https://github.com/Frank-Hudson/sriap-but-forms</RepositoryUrl>
     <Copyright>No Copyright</Copyright>
     <Configurations>Debug;Release;SriapButForms-release-win64</Configurations>
-    <Platforms>AnyCPU;x64;ARM32</Platforms>
+    <Platforms>AnyCPU;x64;ARM32;ARM64;x86</Platforms>
   </PropertyGroup>
 
   <ItemGroup>
